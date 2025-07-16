@@ -5,7 +5,206 @@
   <title>Raj Marketing - Gold, Silver, Bronze Shade</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    :root {
+  --primary: #0e2a47;
+  --secondary: #3bb4f2;
+  --dark-yellow: #ffd600;
+  --text: #1d1d1d;
+  --white: #fff;
+  --gold: #ffd700;
+  --silver: #d0d0d0;
+  --bronze: #b08d57;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--primary);
+  color: var(--white);
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+a { color: inherit; text-decoration: none; }
+img { vertical-align: middle; }
+
+.brand-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.2em;
+}
+.gradient-text {
+  background: linear-gradient(90deg, var(--gold), var(--secondary), var(--bronze));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.shades { margin-bottom: 1.2em; }
+.shade { display: inline-block; width: 22px; height: 22px; border-radius: 50%; margin: 0 5px; }
+.shade.gold { background: var(--gold); border: 1.5px solid #fff2b2; }
+.shade.silver { background: var(--silver); border: 1.5px solid #e4e4e4; }
+.shade.bronze { background: var(--bronze); border: 1.5px solid #e7c8a5; }
+.loading-bar { width: 85%; height: 8px; background: #dbe7ef; border-radius: 4px; margin: 0 auto; }
+.loading-bar-progress { height: 100%; width: 0%; background: linear-gradient(90deg, var(--dark-yellow), var(--secondary)); border-radius: 4px; transition: width 1s; }
+
+#splash {
+  position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; background: var(--primary);
+  z-index: 1000; display: flex; align-items: center; justify-content: center;
+}
+.splash-content { text-align: center; width: 100%; }
+
+/* Header */
+.mobile-header {
+  background: var(--primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.14);
+  padding: 0.5em 0;
+  position: sticky; top: 0; z-index: 100;
+}
+.header-row {
+  display: flex; align-items: center; padding: 0 1em;
+}
+.brand-icon img { width: 36px; height: 36px; }
+.brand-name {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: var(--dark-yellow);
+  margin-left: 10px;
+  flex: 1;
+  letter-spacing: 0.5px;
+}
+.search-bar {
+  position: relative;
+  flex: 2;
+  margin: 0 15px;
+}
+.search-bar input {
+  width: 100%;
+  padding: 0.45em 2em 0.45em 0.9em;
+  border-radius: 20px;
+  border: none;
+  font-family: inherit;
+  font-size: 1em;
+  background: #eaf6fc;
+  color: var(--primary);
+  outline: none;
+}
+.icon-search {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  width: 20px; height: 20px; background: url('../assets/icons/search.svg') center/cover no-repeat;
+  opacity: 0.7;
+}
+.header-actions {
+  display: flex; align-items: center; gap: 10px;
+}
+.icon-btn { background: none; border: none; cursor: pointer; padding: 8px; }
+.icon-user { display: inline-block; width: 24px; height: 24px; background: url('../assets/icons/user.svg') center/cover no-repeat; }
+.icon-menu { display: inline-block; width: 28px; height: 28px; background: url('../assets/icons/menu.svg') center/cover no-repeat; }
+
+/* Side Menu */
+#side-menu, #side-menu-backdrop { display:none;}
+.side-menu {
+  position: fixed; left: 0; top: 0; width: 75vw; max-width: 330px; height: 100vh;
+  background: var(--primary); box-shadow: 2px 0 16px rgba(0,0,0,0.25); z-index: 9999;
+  transform: translateX(-100%); transition: transform 0.3s;
+  padding-top: 0.4em;
+}
+.side-menu.active { transform: translateX(0); display: block;}
+#side-menu-backdrop.active {display:block; position:fixed; left:0;top:0;width:100vw;height:100vh;z-index:9998;background:rgba(0,0,0,0.25);}
+.side-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 1em 1.4em 0.5em;}
+.side-menu-header span { font-size: 1.11em; color: var(--dark-yellow);}
+.icon-close { display: inline-block; width: 26px; height: 26px; background: url('../assets/icons/close.svg') center/cover no-repeat;}
+.side-menu ul { list-style: none; padding: 0 1.4em;}
+.side-menu li { margin: 1em 0;}
+.side-menu a { color: var(--white); font-size: 1.14em; display: flex; align-items: center; gap: 12px;}
+.icon-info, .icon-tools, .icon-products, .icon-gallery, .icon-contact, .icon-crm, .icon-admin {
+  display:inline-block;width:25px;height:25px;background-size:cover;margin-right:8px;
+}
+.icon-info {background-image:url('../assets/icons/info.svg');}
+.icon-tools {background-image:url('../assets/icons/tools.svg');}
+.icon-products {background-image:url('../assets/icons/products.svg');}
+.icon-gallery {background-image:url('../assets/icons/gallery.svg');}
+.icon-contact {background-image:url('../assets/icons/contact.svg');}
+.icon-crm {background-image:url('../assets/icons/crm.svg');}
+.icon-admin {background-image:url('../assets/icons/admin.svg');}
+
+/* Promotion Slider */
+.slider-section { background: var(--primary); margin: 1.4em 0; }
+.slider { display: flex; overflow-x: auto; scroll-behavior: smooth; gap: 1em; padding: 1em 0.5em;}
+.slide, .ad-slide, .product-slide {
+  background: #18345a;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(60,60,60,0.09);
+  min-width: 280px; max-width: 290px;
+  margin-right: 0.5em;
+  padding: 1em 1em;
+  display: flex; align-items: center; gap: 1em;
+}
+.promo-icon, .ad-icon, .product-icon {
+  width: 48px; height: 48px; border-radius: 12px; background: var(--secondary);
+  display: flex; align-items: center; justify-content: center; font-size: 2em; color: var(--primary);
+}
+.promo-title { font-weight: 700; color: var(--dark-yellow); font-size: 1.08em; }
+.promo-desc { font-size: 0.98em; color: #cbe7fa; }
+.slider-nav { text-align: right; margin: 0.3em 1em; }
+.slider-arrow { background: var(--secondary); border: none; border-radius: 50%; width: 35px; height: 35px; margin: 0 0.2em;}
+.icon-arrow-left, .icon-arrow-right {
+  width: 20px; height: 20px; display: inline-block; background-size: cover;
+}
+.icon-arrow-left { background-image: url('../assets/icons/arrow-left.svg'); }
+.icon-arrow-right { background-image: url('../assets/icons/arrow-right.svg'); }
+
+.section-title { color: var(--dark-yellow); font-weight: 700; margin: 0.6em 0 0.2em 0; font-size: 1.2em; }
+.ad-slide, .product-slide { flex-direction: column; align-items: flex-start; min-width: 210px; max-width: 220px; }
+.ad-icon, .product-icon { margin-bottom: 0.6em; }
+.ad-caption, .product-title { font-size: 1.06em; font-weight: 700; color: var(--secondary);}
+.product-desc { color: #cbe7fa; font-size: 0.97em; }
+
+/* Lower Menu */
+.lower-menu {
+  display: flex; justify-content: space-around; align-items: center;
+  background: #112945;
+  border-radius: 22px 22px 0 0;
+  position: sticky; bottom: 0; left: 0; right: 0;
+  z-index: 10; margin-top: 0.5em; padding: 0.3em 0.2em;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.10);
+}
+.lower-menu a { flex: 1; text-align: center; color: var(--white); font-size: 1em; padding: 0.6em 0;}
+.lower-menu span { display: block; }
+.lower-menu .icon-calendar, .icon-price, .icon-estimate, .icon-call {
+  width: 28px; height: 28px; margin: 0 auto; display: block; background-size: cover;
+}
+.icon-calendar {background-image:url('../assets/icons/calendar.svg');}
+.icon-price {background-image:url('../assets/icons/price.svg');}
+.icon-estimate {background-image:url('../assets/icons/estimate.svg');}
+.icon-call {background-image:url('../assets/icons/call.svg');}
+
+/* Footer */
+footer {
+  background: #0e233a;
+  text-align: center;
+  padding: 1em 0 0.6em 0;
+  font-size: 0.97em;
+  color: #e3e3e3;
+  border-radius: 20px 20px 0 0;
+  margin-top: 2em;
+}
+.footer-row { display: flex; justify-content: center; gap: 1.6em; margin-bottom: 0.4em;}
+.footer-row a { color: var(--dark-yellow); font-size: 1.04em;}
+.footer-brand { color: var(--secondary); margin-top: 0.2em; font-weight: 700; }
+
+@media (max-width: 600px) {
+  .slide, .ad-slide, .product-slide { min-width: 85vw; max-width: 90vw;}
+  .header-row { flex-wrap: wrap; }
+  .brand-name { font-size: 1.1em; }
+  .search-bar { margin: 5px 0; }
+  .mobile-header { padding: 0.2em 0;}
+  .slider-nav { margin: 0.3em 0.4em;}
+}
+  </style>
   <link rel="icon" href="assets/icons/logo.svg">
 </head>
 <body>
