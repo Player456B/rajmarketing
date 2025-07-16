@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Raj Marketing - Gold, Silver, Bronze Shade</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="icon" href="assets/icons/logo.svg">
+</head>
+<body>
+  <!-- 1. Splash Loading with Branding -->
+  <div id="splash">
+    <div class="splash-content">
+      <h1 class="brand-title gradient-text">Raj Marketing</h1>
+      <div class="shades">
+        <span class="shade gold"></span>
+        <span class="shade silver"></span>
+        <span class="shade bronze"></span>
+      </div>
+      <div class="loading-bar">
+        <div class="loading-bar-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Top Column Branding -->
+  <header class="mobile-header">
+    <div class="header-row">
+      <div class="brand-icon"><img src="assets/icons/logo.svg" alt="logo"></div>
+      <div class="brand-name">Raj Marketing</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." />
+        <span class="icon-search"></span>
+      </div>
+      <div class="header-actions">
+        <a href="login.html" class="icon-btn"><span class="icon-user"></span></a>
+        <button id="menu-btn" class="icon-btn"><span class="icon-menu"></span></button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- 8. Slide Out 3-line Menu -->
+  <nav id="side-menu" class="side-menu">
+    <div class="side-menu-header">
+      <span>Menu</span>
+      <button id="close-menu" class="icon-btn"><span class="icon-close"></span></button>
+    </div>
+    <ul>
+      <li><a href="about.html"><span class="icon-info"></span> About Us</a></li>
+      <li><a href="services.html"><span class="icon-tools"></span> Services</a></li>
+      <li><a href="products.html"><span class="icon-products"></span> Products</a></li>
+      <li><a href="gallery.html"><span class="icon-gallery"></span> Gallery</a></li>
+      <li><a href="contact.html"><span class="icon-contact"></span> Contact Us</a></li>
+      <li><a href="crm.html"><span class="icon-crm"></span> CRM</a></li>
+      <li><a href="admin.html"><span class="icon-admin"></span> Admin</a></li>
+    </ul>
+  </nav>
+  <div id="side-menu-backdrop"></div>
+
+  <main>
+    <!-- 3. Promotion Slider (8 slides) -->
+    <section class="slider-section">
+      <div class="slider" id="promo-slider">
+        <!-- Example slides with icons, replace with images later -->
+        <div class="slide">
+          <div class="promo-icon icon-promo1"></div>
+          <div>
+            <div class="promo-title">Best Price Guarantee</div>
+            <div class="promo-desc">Get the lowest rates in Mysore!</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="promo-icon icon-promo2"></div>
+          <div>
+            <div class="promo-title">Expert Installation</div>
+            <div class="promo-desc">Trained professionals at your service.</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="promo-icon icon-promo3"></div>
+          <div>
+            <div class="promo-title">Year-round Protection</div>
+            <div class="promo-desc">Shield your family from mosquitoes.</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="promo-icon icon-promo4"></div>
+          <div>
+            <div class="promo-title">Custom Sizes</div>
+            <div class="promo-desc">Perfect fit for every window & door.</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="promo-icon icon-promo5"></div>
+          <div>
+            <div class="promo-title">Premium Materials</div>
+            <div class="promo-desc">Quality nets that last for years.</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="promo-icon icon-promo6"></div>
+          <div>
+            <div class="promo-title">Fast Delivery</div>
+            <div class="promo-desc">Quick turnaround, minimal wait.</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="promo-icon icon-promo7"></div>
+          <div>
+            <div class="promo-title">Customer Support</div>
+            <div class="promo-desc">We’re always here to help you.</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="promo-icon icon-promo8"></div>
+          <div>
+            <div class="promo-title">Satisfaction Guarantee</div>
+            <div class="promo-desc">Love it or your money back!</div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-nav">
+        <button id="promo-prev" class="slider-arrow"><span class="icon-arrow-left"></span></button>
+        <button id="promo-next" class="slider-arrow"><span class="icon-arrow-right"></span></button>
+      </div>
+    </section>
+
+    <!-- 4. Lower Menu (Sticky) -->
+    <nav class="lower-menu">
+      <a href="appointment.html"><span class="icon-calendar"></span><span>Appointment</span></a>
+      <a href="price.html"><span class="icon-price"></span><span>Price Check</span></a>
+      <a href="estimate.html"><span class="icon-estimate"></span><span>Estimate</span></a>
+      <a href="tel:+919876543210"><span class="icon-call"></span><span>Call Now</span></a>
+    </nav>
+
+    <!-- 5. Facebook Cover Size Ads Slider (10 slides) -->
+    <section class="slider-section">
+      <h2 class="section-title">Latest Promotions</h2>
+      <div class="slider" id="ad-slider">
+        <!-- Replace with your own images, using icons for now -->
+        <div class="ad-slide"><div class="ad-icon icon-ad1"></div><div class="ad-caption">Gold Series Nets</div></div>
+        <div class="ad-slide"><div class="ad-icon icon-ad2"></div><div class="ad-caption">Bronze Offer</div></div>
+        <div class="ad-slide"><div class="ad-icon icon-ad3"></div><div class="ad-caption">Silver Savings</div></div>
+        <div class="ad-slide"><div class="ad-icon icon-ad4"></div><div class="ad-caption">Free Fitting</div></div>
+        <div class="ad-slide"><div class="ad-icon icon-ad5"></div><div class="ad-caption">Monsoon Ready</div></div>
+        <div class="ad-slide"><div class="ad-icon icon-ad6"></div><div class="ad-caption">Easy Clean Mesh</div></div>
+        <div class="ad-slide"><div class="ad-icon icon-ad7"></div><div class="ad-caption">Refer & Earn</div></div>
+        <div class="ad-slide"><div class="ad-icon icon-ad8"></div><div class="ad-caption">Door Nets</div></div>
+        <div class="ad-slide"><div class="ad-icon icon-ad9"></div><div class="ad-caption">Child Safe</div></div>
+        <div class="ad-slide"><div class="ad-icon icon-ad10"></div><div class="ad-caption">Bulk Discount</div></div>
+      </div>
+      <div class="slider-nav">
+        <button id="ad-prev" class="slider-arrow"><span class="icon-arrow-left"></span></button>
+        <button id="ad-next" class="slider-arrow"><span class="icon-arrow-right"></span></button>
+      </div>
+    </section>
+
+    <!-- 6. Product Slider (4 products) -->
+    <section class="slider-section">
+      <h2 class="section-title">Our Products</h2>
+      <div class="slider" id="product-slider">
+        <div class="product-slide">
+          <div class="product-icon icon-prod1"></div>
+          <div class="product-title">Fiberglass Net</div>
+          <div class="product-desc">Strong, flexible, long-lasting mesh for all windows.</div>
+        </div>
+        <div class="product-slide">
+          <div class="product-icon icon-prod2"></div>
+          <div class="product-title">Aluminum Frame Net</div>
+          <div class="product-desc">Premium frame, rust-resistant & stylish.</div>
+        </div>
+        <div class="product-slide">
+          <div class="product-icon icon-prod3"></div>
+          <div class="product-title">Velcro Net</div>
+          <div class="product-desc">Easy to install, remove, and clean.</div>
+        </div>
+        <div class="product-slide">
+          <div class="product-icon icon-prod4"></div>
+          <div class="product-title">Door Nets</div>
+          <div class="product-desc">Full size protection for main & balcony doors.</div>
+        </div>
+      </div>
+      <div class="slider-nav">
+        <button id="prod-prev" class="slider-arrow"><span class="icon-arrow-left"></span></button>
+        <button id="prod-next" class="slider-arrow"><span class="icon-arrow-right"></span></button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 7. Bottom Column (Footer) -->
+  <footer>
+    <div class="footer-row">
+      <a href="terms.html">Terms</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+    <div class="footer-brand">
+      &copy; 2025 Raj Marketing. All Rights Reserved.
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+  </html>
