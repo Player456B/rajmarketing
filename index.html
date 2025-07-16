@@ -364,7 +364,42 @@ footer {
     </div>
   </footer>
   <script>
-    
+    // Splash loading animation with shiny text
+window.addEventListener('DOMContentLoaded', () => {
+  const splash = document.getElementById('splash');
+  setTimeout(() => { splash.style.opacity = '0'; }, 1600);
+  setTimeout(() => { splash.style.display = 'none'; }, 1800);
+});
+
+// Side menu open/close
+const menuBtn = document.getElementById('menu-btn');
+const sideMenu = document.getElementById('side-menu');
+const closeMenu = document.getElementById('close-menu');
+const backdrop = document.getElementById('side-menu-backdrop');
+if (menuBtn && sideMenu && closeMenu && backdrop) {
+  menuBtn.onclick = () => { sideMenu.classList.add('active'); backdrop.classList.add('active'); }
+  closeMenu.onclick = () => { sideMenu.classList.remove('active'); backdrop.classList.remove('active'); }
+  backdrop.onclick = () => { sideMenu.classList.remove('active'); backdrop.classList.remove('active'); }
+}
+
+// Simple slider logic for all sliders
+function sliderInit(sliderId, prevBtnId, nextBtnId) {
+  const slider = document.getElementById(sliderId);
+  const prev = document.getElementById(prevBtnId);
+  const next = document.getElementById(nextBtnId);
+
+  if (!slider || !prev || !next) return;
+  let slideWidth = slider.children[0].offsetWidth + 18;
+  prev.onclick = () => {
+    slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+  }
+  next.onclick = () => {
+    slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
+  }
+}
+sliderInit('promo-slider', 'promo-prev', 'promo-next');
+sliderInit('ad-slider', 'ad-prev', 'ad-next');
+sliderInit('product-slider', 'prod-prev', 'prod-next');
   </script>
 </body>
 </html>
