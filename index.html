@@ -52,7 +52,7 @@
       text-shadow: 0 2px 20px #000a, 0 0 18px var(--dark-yellow);
     }
     @keyframes shine {
-      0% {background-position: 200% 0;}
+      0% {background-position: 400% 0;}
       100% {background-position: 0 0;}
     }
     .splash-loading-bar {
@@ -149,13 +149,6 @@
     .main-search-input {
       flex: 1; border: none; outline: none; background: transparent; font-size: 0.98em; font-family: inherit; padding: 0.4em 0.7em; color: #18345a;
     }
-    .main-search-btn {
-      background: var(--secondary); color: var(--white); border: none; border-radius: 10px; font-weight: 400; 
-      font-family: inherit; font-size: 0.67em; padding: 0.2em .75em; margin-right: 5px; cursor: pointer; 
-      transition: background 0.18s;
-    }
-    .main-search-btn:hover {background: var(--dark-yellow); color: var(--primary);}
-
     /* Value Section */
     .value-section {
       background: #18345a;
@@ -290,7 +283,6 @@
     <section class="search-bar-section">
       <form class="search-form" onsubmit="return false;">
         <input type="text" placeholder="🔍 Search..." class="main-search-input">
-        <button class="main-search-btn" title="Search">Go</button>
       </form>
     </section>
 
