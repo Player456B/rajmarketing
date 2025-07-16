@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up | Raj Marketing Mysore</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="../images/logo.svg">
+  <style>
+    :root { --primary: #0e2a47; --secondary: #3bb4f2; --dark-yellow: #ffd600;}
+    body { background: var(--primary); color: var(--white); font-family: 'Poppins', sans-serif; margin: 0;}
+    .container { max-width: 360px; margin: 6vh auto; padding: 2em 1.5em; background: #18345a; border-radius: 16px; box-shadow: 0 2px 18px #0003;}
+    h1 { color: var(--dark-yellow); text-align:center;}
+    label { font-weight: 600; color: var(--dark-yellow); margin-top: 1.1em; display: block;}
+    input { width: 100%; padding: 0.75em; border-radius: 9px; border: none; font-size: 1em; margin-top: 0.4em; color: #18345a;}
+    button { background: var(--secondary); color: #fff; padding: 0.7em 2em; border: none; border-radius: 8px; font-weight: 700; margin-top: 1.5em; cursor: pointer; width:100%;}
+    .switch { color:#cbe7fa; text-align:center; margin-top:1.2em;}
+    .switch a { color: var(--secondary);}
+    .msg {margin-top:1em; color:#cbe7fa;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sign Up</h1>
+    <form id="signupForm">
+      <label for="name">Full Name *</label>
+      <input id="name" name="name" required maxlength="32">
+      <label for="phone">Mobile Number *</label>
+      <input id="phone" name="phone" type="tel" maxlength="10" required pattern="[0-9]{10}">
+      <label for="email">Email *</label>
+      <input id="email" name="email" type="email" required>
+      <label for="password">Password *</label>
+      <input id="password" name="password" type="password" required>
+      <button type="submit">Sign Up</button>
+      <div class="msg" id="signupMsg"></div>
+    </form>
+    <div class="switch">
+      Have an account? <a href="login.html">Login</a>
+    </div>
+  </div>
+<script>
+document.getElementById('signupForm').onsubmit = function(e){
+  e.preventDefault();
+  const name = signupForm.name.value.trim();
+  const phone = signupForm.phone.value.trim();
+  const email = signupForm.email.value.trim();
+  const password = signupForm.password.value;
+  if(!name || !phone || !email || !password) return;
+  let users = JSON.parse(localStorage.getItem('raj_users')||'[]');
+  if(users.find(u=>u.phone===phone)){
+    signupMsg.textContent = "Mobile number already registered.";
+    return;
+  }
+  const joinDate = new Date().toISOString().slice(0,10);
+  users.push({name, phone, email, password, joinDate, profile:'', cover:0, member:'', memberPay:false, id:'', forms:{}});
+  localStorage.setItem('raj_users', JSON.stringify(users));
+  signupMsg.textContent = "Registration successful! Redirecting...";
+  setTimeout(()=>window.location.href="login.html",1100);
+}
+</script>
+</body>
+</html>
