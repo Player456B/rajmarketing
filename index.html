@@ -6,271 +6,57 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css"/>
-  <link rel="icon" href="assets/icons/logo.svg">
-  <style>
-  body {background: #0e2a47;}
-    :root {
-  --primary: #0e2a47;
-  --secondary: #3bb4f2;
-  --dark-yellow: #ffd600;
-  --gold: #ffd700;
-  --silver: #d0d0d0;
-  --bronze: #b08d57;
-  --white: #fff;
-}
-html, body {
-  height: 100%;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: var(--primary);
-  color: var(--white);
-}
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-a { color: inherit; text-decoration: none; }
-img { vertical-align: middle; }
-.shadow { box-shadow: 0 2px 14px rgba(30,40,80,0.16); }
-
-/* Splash */
-#splash {
-  position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
-  background: var(--primary);
-  z-index: 1000; display: flex; align-items: center; justify-content: center;
-  transition: opacity 0.2s;
-}
-.splash-content {
-  text-align: center; width: 100%;
-}
-.brand-logo { font-size: 2.6em; margin-bottom: 0.2em; display:inline-block; }
-.brand-title-anim {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 1.6em;
-  letter-spacing: 1px;
-  margin-bottom: 0.1em;
-  background: linear-gradient(
-    90deg,
-    var(--gold) 0%,
-    var(--silver) 40%,
-    var(--bronze) 100%
-  );
-  background-size: 200% auto;
-  color: #fff;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 10px #0008);
-  animation: shine 2.2s linear 1;
-}
-@keyframes shine {
-  0% {background-position: 200% 0;}
-  100% {background-position: 0 0;}
-}
-.splash-desc {
-  font-size: 1em;
-  font-weight: bold;
-  color: var(--dark-yellow);
-  text-shadow: 0 1px 5px rgba(0,0,0,0.16);
-  letter-spacing: 0.5px;
-}
-
-/* Header */
-.mobile-header {
-  background: var(--primary);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.13);
-  padding: 0.5em 0;
-  position: sticky; top: 0; z-index: 100;
-}
-.header-row {
-  display: flex; align-items: center; padding: 0 1em;
-}
-.brand-name {
-  font-size: 1.2em;
-  font-weight: 700;
-  color: var(--dark-yellow);
-  margin-left: 10px;
-  flex: 1;
-  letter-spacing: 0.3px;
-}
-.search-bar {
-  position: relative;
-  flex: 2;
-  margin: 0 10px;
-}
-.search-bar input {
-  width: 100%;
-  padding: 0.45em 2em 0.45em 0.9em;
-  border-radius: 18px;
-  border: none;
-  font-family: inherit;
-  font-size: 1em;
-  background: #eaf6fc;
-  color: var(--primary);
-  outline: none;
-}
-.icon-search {
-  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-  font-size: 1em; color: #3bb4f2; opacity: 0.7;
-}
-.header-actions { display: flex; align-items: center; gap: 10px; }
-.icon-btn { background: none; border: none; cursor: pointer; padding: 7px; font-size: 1.3em; }
-.icon-menu { font-size: 1.4em; }
-
-/* Side Menu */
-#side-menu, #side-menu-backdrop { display:none;}
-.side-menu {
-  position: fixed; left: 0; top: 0; width: 76vw; max-width: 320px; height: 100vh;
-  background: var(--primary); box-shadow: 2px 0 18px rgba(0,0,0,0.22); z-index: 9999;
-  transform: translateX(-100%); transition: transform 0.28s;
-  padding-top: 0.2em;
-}
-.side-menu.active { transform: translateX(0); display: block;}
-#side-menu-backdrop.active {display:block; position:fixed; left:0;top:0;width:100vw;height:100vh;z-index:9998;background:rgba(0,0,0,0.16);}
-.side-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 1em 1.2em 0.2em;}
-.side-menu-header span { font-size: 1.1em; color: var(--dark-yellow);}
-.side-menu ul { list-style: none; padding: 0 1.1em;}
-.side-menu li { margin: 1em 0;}
-.side-menu a { color: var(--white); font-size: 1.07em; display: flex; align-items: center; gap: 10px; font-weight: 600;}
-.side-menu hr {margin: .6em 0;}
-
-.slider-section {background: var(--primary); margin: 1.2em 0;}
-.slider {display: flex;overflow-x: auto;scroll-behavior: smooth;gap: 1em;padding: 1em 0.5em;}
-.slide, .ad-slide, .product-slide {
-  background: #18345a;
-  border-radius: 13px;
-  min-width: 245px; max-width: 265px;
-  margin-right: 0.6em; padding: 1em 1em;
-  display: flex; align-items: center; gap: 1em;
-  box-shadow: 0 2px 16px rgba(50,40,100,0.15);
-}
-.slide {min-width: 245px; max-width: 265px;}
-.promo-icon, .ad-icon, .product-icon {
-  font-size: 2em; margin-right: 0.2em; display:inline-block; width:48px; text-align:center;
-}
-.promo-title { font-weight: 700; color: var(--dark-yellow); font-size: 1.05em; }
-.promo-desc { font-size: 0.97em; color: #cbe7fa; }
-.slider-nav { text-align: right; margin: 0.3em 1em; }
-.slider-arrow { background: var(--secondary); border: none; border-radius: 50%; width: 33px; height: 33px; margin: 0 0.15em; font-size: 1.2em; color: var(--primary); }
-
-.section-title { color: var(--dark-yellow); font-weight: 700; margin: 0.5em 0 0.1em 0; font-size: 1.18em; }
-.ad-slide, .product-slide { flex-direction: column; align-items: flex-start; min-width: 175px; max-width: 190px;}
-.ad-icon, .product-icon { margin-bottom: 0.5em; }
-.ad-caption, .product-title { font-size: 1.03em; font-weight: 700; color: var(--secondary);}
-.product-desc { color: #cbe7fa; font-size: 0.96em; }
-.business-desc-section {
-  background: #18345a;
-  border-radius: 12px;
-  margin: 0.8em 1em 1em 1em;
-  padding: 1.1em 1.2em 0.6em 1.2em;
-  box-shadow: 0 2px 14px rgba(30,40,80,0.15);
-}
-.business-desc-section h2 {
-  color: var(--dark-yellow);
-  font-weight: 700;
-  font-size: 1.12em;
-}
-.business-desc-section p {
-  font-size: 0.99em;
-  color: #d4e6f3;
-  margin-top: 0.7em;
-}
-
-/* Lower Menu */
-.lower-menu {
-  display: flex; justify-content: space-around; align-items: center;
-  background: #112945;
-  border-radius: 19px 19px 0 0;
-  position: sticky; bottom: 0; left: 0; right: 0;
-  z-index: 10; margin-top: 0.6em; padding: 0.3em 0.12em;
-  box-shadow: 0 -2px 12px rgba(0,0,0,0.13);
-}
-.lower-menu a { flex: 1; text-align: center; color: var(--white); font-size: 1em; padding: 0.5em 0;}
-.lower-menu span { display: block; }
-.lower-menu a span:first-child {font-size:1.3em;margin-bottom:0.1em;}
-
-footer {
-  background: #0e233a;
-  text-align: center;
-  padding: 1em 0 0.5em 0;
-  font-size: 0.98em;
-  color: #e3e3e3;
-  border-radius: 14px 14px 0 0;
-  margin-top: 2em;
-}
-.footer-row { display: flex; justify-content: center; gap: 1.5em; margin-bottom: 0.3em;}
-.footer-row a { color: var(--dark-yellow); font-size: 1.04em;}
-.footer-brand { color: var(--secondary); margin-top: 0.2em; font-weight: 700; }
-
-@media (max-width: 600px) {
-  .slide, .ad-slide, .product-slide { min-width: 78vw; max-width: 90vw;}
-  .header-row { flex-wrap: wrap; }
-  .brand-name { font-size: 1.07em; }
-  .search-bar { margin: 5px 0; }
-  .mobile-header { padding: 0.2em 0;}
-  .slider-nav { margin: 0.3em 0.4em;}
-  .business-desc-section {margin: 0.8em 0.5em;}
-    }
-  </style>
+  <link rel="icon" href="assets/images/logo.svg">
 </head>
 <body>
-  <!-- 1. Splash Loading with Branding -->
+  <!-- 1. Splash/Loading Page -->
   <div id="splash">
     <div class="splash-content">
-      <h1 class="brand-title gradient-text">Raj Marketing</h1>
-      <div class="shades">
-        <span class="shade gold"></span>
-        <span class="shade silver"></span>
-        <span class="shade bronze"></span>
-      </div>
-      <div class="loading-bar">
-        <div class="loading-bar-progress"></div>
-      </div>
+      <span class="brand-logo">🟡</span>
+      <h1 class="brand-splash-title">
+        <span class="shine">Raj Marketing</span>
+      </h1>
+      <div class="splash-caption">Gold, Silver, Bronze Colour Shade Nets</div>
     </div>
   </div>
-
-  <!-- Header / Top Bar -->
+<!--Open Home page -->
+  <!-- 2. Top Bar (Header) -->
   <header class="mobile-header">
     <div class="header-row">
       <div class="brand-logo">🟡</div>
       <div class="brand-name">Raj Marketing</div>
-      <div class="search-bar">
-        <input type="text" placeholder="Search..." />
-        <span class="icon-search">🔍</span>
-      </div>
       <div class="header-actions">
-        <a href="login.html" class="icon-btn" title="Customer Login"><span>👤</span></a>
+        <a href="assets/pages/login.html" class="icon-btn" title="Customer Login"><span>👤</span></a>
         <button id="menu-btn" class="icon-btn" title="Menu"><span class="icon-menu">≡</span></button>
       </div>
     </div>
   </header>
 
-  <!-- Hamburger Side Menu -->
+  <!-- Hamburger/3-line Side Menu -->
   <nav id="side-menu" class="side-menu">
     <div class="side-menu-header">
       <span>Menu</span>
       <button id="close-menu" class="icon-btn"><span>✖️</span></button>
     </div>
     <ul>
-      <li><a href="about.html">ℹ️ About Us</a></li>
-      <li><a href="services.html">🛠️ Services</a></li>
-      <li><a href="products.html">🛒 Products</a></li>
-      <li><a href="gallery.html">🖼️ Gallery</a></li>
-      <li><a href="contact.html">📞 Contact Us</a></li>
-      <li><a href="crm.html">📊 CRM</a></li>
-      <li><a href="admin.html">🛡️ Admin</a></li>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="assets/pages/about.html">ℹ️ About Us</a></li>
+      <li><a href="assets/pages/services.html">🛠️ Services</a></li>
+      <li><a href="assets/pages/products.html">🛒 Products</a></li>
+      <li><a href="assets/pages/gallery.html">🖼️ Gallery</a></li>
+      <li><a href="assets/pages/contact.html">📞 Contact Us</a></li>
+      <li><a href="assets/pages/crm.html">📊 CRM</a></li>
+      <li><a href="assets/pages/admin.html">🛡️ Admin</a></li>
       <hr style="opacity:0.2;">
-      <li><a href="terms.html">📝 Terms</a></li>
-      <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
-      <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+      <li><a href="assets/pages/terms.html">📝 Terms</a></li>
+      <li><a href="assets/pages/disclaimer.html">⚠️ Disclaimer</a></li>
+      <li><a href="assets/pages/privacy.html">🔒 Privacy Policy</a></li>
     </ul>
   </nav>
   <div id="side-menu-backdrop"></div>
 
   <main>
-    <!-- Promotion Slider -->
+    <!-- 3. Promotion Slider (8) -->
     <section class="slider-section">
       <div class="slider shadow" id="promo-slider">
         <div class="slide"><span class="promo-icon">💰</span><div><div class="promo-title">Best Price!</div><div class="promo-desc">Unbeatable deals for every home</div></div></div>
@@ -288,37 +74,49 @@ footer {
       </div>
     </section>
 
-    <!-- Business Description -->
-    <section class="business-desc-section shadow">
-      <h2>About Raj Marketing</h2>
-      <p>
-        Raj Marketing is Mysore's trusted brand for gold, silver, and bronze shade mosquito nets. We specialize in premium, custom-fitted window and door nets with a focus on quality, fast installation, and after-sales support.  
-        Our sky blue and gold branding stands for reliability and style. Whether you need residential or commercial solutions, Raj Marketing delivers the best protection for your family and spaces!
-      </p>
+    <!-- 4. Search Bar (Below Promotion Slider) -->
+    <section class="search-bar-section">
+      <form class="search-form" onsubmit="return false;">
+        <input type="text" placeholder="🔍 Search products, services, info..." class="main-search-input">
+        <button class="main-search-btn" title="Search">Go</button>
+      </form>
     </section>
 
-    <!-- Lower Sticky Menu -->
+    <!-- 5. Value of Mosquito Net for Windows -->
+    <section class="value-section shadow">
+      <h2>Why Choose Mosquito Nets for Windows?</h2>
+      <ul>
+        <li>🦟 <b>Protects Your Family:</b> Blocks mosquitoes and insects, reducing the risk of disease.</li>
+        <li>🌬️ <b>Enjoy Fresh Air:</b> Allows natural air flow while keeping bugs out.</li>
+        <li>🌞 <b>Natural Light:</b> Lets sunlight in – no dark rooms!</li>
+        <li>🛡️ <b>Safe & Durable:</b> Made from high-quality, long-lasting materials.</li>
+        <li>💸 <b>Cost Effective:</b> No need for chemicals or sprays.</li>
+        <li>🏠 <b>Upgrade Your Home:</b> Customizable designs for every window & door.</li>
+      </ul>
+    </section>
+
+    <!-- 6. Lower Sticky Menu -->
     <nav class="lower-menu shadow">
-      <a href="appointment.html"><span>📅</span><span>Appointment</span></a>
-      <a href="price.html"><span>💵</span><span>Price Check</span></a>
-      <a href="estimate.html"><span>🧮</span><span>Estimate</span></a>
+      <a href="assets/pages/appointment.html"><span>📅</span><span>Appointment</span></a>
+      <a href="assets/pages/price.html"><span>💵</span><span>Price Check</span></a>
+      <a href="assets/pages/estimate.html"><span>🧮</span><span>Estimate</span></a>
       <a href="tel:+919876543210"><span>📞</span><span>Call Now</span></a>
     </nav>
 
-    <!-- Facebook Cover Ads Slider -->
+    <!-- 7. Facebook Cover Ads Slider (10 slides) -->
     <section class="slider-section">
       <h2 class="section-title">Latest Promotions</h2>
       <div class="slider shadow" id="ad-slider">
-        <div class="ad-slide"><span class="ad-icon">🥇</span><span class="ad-caption">Gold Series Nets</span></div>
-        <div class="ad-slide"><span class="ad-icon">🥈</span><span class="ad-caption">Silver Savings</span></div>
-        <div class="ad-slide"><span class="ad-icon">🥉</span><span class="ad-caption">Bronze Budget</span></div>
-        <div class="ad-slide"><span class="ad-icon">🆓</span><span class="ad-caption">Free Fitting</span></div>
-        <div class="ad-slide"><span class="ad-icon">🌧️</span><span class="ad-caption">Monsoon Ready</span></div>
-        <div class="ad-slide"><span class="ad-icon">🧹</span><span class="ad-caption">Easy Clean Mesh</span></div>
-        <div class="ad-slide"><span class="ad-icon">🎁</span><span class="ad-caption">Refer & Earn</span></div>
-        <div class="ad-slide"><span class="ad-icon">🚪</span><span class="ad-caption">Door Nets</span></div>
-        <div class="ad-slide"><span class="ad-icon">👶</span><span class="ad-caption">Child Safe</span></div>
-        <div class="ad-slide"><span class="ad-icon">💯</span><span class="ad-caption">Bulk Discount</span></div>
+        <div class="ad-slide"><img src="assets/images/ad1.jpg" alt="" class="ad-img"><span class="ad-caption">Gold Series Nets</span></div>
+        <div class="ad-slide"><img src="assets/images/ad2.jpg" alt="" class="ad-img"><span class="ad-caption">Silver Savings</span></div>
+        <div class="ad-slide"><img src="assets/images/ad3.jpg" alt="" class="ad-img"><span class="ad-caption">Bronze Budget</span></div>
+        <div class="ad-slide"><img src="assets/images/ad4.jpg" alt="" class="ad-img"><span class="ad-caption">Free Fitting</span></div>
+        <div class="ad-slide"><img src="assets/images/ad5.jpg" alt="" class="ad-img"><span class="ad-caption">Monsoon Ready</span></div>
+        <div class="ad-slide"><img src="assets/images/ad6.jpg" alt="" class="ad-img"><span class="ad-caption">Easy Clean Mesh</span></div>
+        <div class="ad-slide"><img src="assets/images/ad7.jpg" alt="" class="ad-img"><span class="ad-caption">Refer & Earn</span></div>
+        <div class="ad-slide"><img src="assets/images/ad8.jpg" alt="" class="ad-img"><span class="ad-caption">Door Nets</span></div>
+        <div class="ad-slide"><img src="assets/images/ad9.jpg" alt="" class="ad-img"><span class="ad-caption">Child Safe</span></div>
+        <div class="ad-slide"><img src="assets/images/ad10.jpg" alt="" class="ad-img"><span class="ad-caption">Bulk Discount</span></div>
       </div>
       <div class="slider-nav">
         <button id="ad-prev" class="slider-arrow">←</button>
@@ -326,27 +124,27 @@ footer {
       </div>
     </section>
 
-    <!-- Product Slider -->
+    <!-- 8. Product Slider (4) -->
     <section class="slider-section">
       <h2 class="section-title">Our Products</h2>
       <div class="slider shadow" id="product-slider">
         <div class="product-slide">
-          <span class="product-icon">🪟</span>
+          <img src="assets/images/prod1.png" alt="" class="product-img">
           <div class="product-title">Fiberglass Net</div>
           <div class="product-desc">Strong, flexible mesh for all windows.</div>
         </div>
         <div class="product-slide">
-          <span class="product-icon">🪟</span>
+          <img src="assets/images/prod2.png" alt="" class="product-img">
           <div class="product-title">Aluminum Frame Net</div>
           <div class="product-desc">Premium rust-free frames.</div>
         </div>
         <div class="product-slide">
-          <span class="product-icon">🧲</span>
+          <img src="assets/images/prod3.png" alt="" class="product-img">
           <div class="product-title">Velcro Net</div>
           <div class="product-desc">Easy to install & remove.</div>
         </div>
         <div class="product-slide">
-          <span class="product-icon">🚪</span>
+          <img src="assets/images/prod4.png" alt="" class="product-img">
           <div class="product-title">Door Nets</div>
           <div class="product-desc">For main and balcony doors.</div>
         </div>
@@ -358,54 +156,27 @@ footer {
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- 9. Footer (Extended Links) -->
   <footer>
-    <div class="footer-row">
-      <a href="terms.html">Terms</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="privacy.html">Privacy Policy</a>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="assets/pages/about.html">About Us</a>
+      <a href="assets/pages/services.html">Services</a>
+      <a href="assets/pages/products.html">Products</a>
+      <a href="assets/pages/gallery.html">Gallery</a>
+      <a href="assets/pages/contact.html">Contact</a>
+      <a href="assets/pages/terms.html">Terms</a>
+      <a href="assets/pages/disclaimer.html">Disclaimer</a>
+      <a href="assets/pages/privacy.html">Privacy Policy</a>
+      <a href="assets/pages/crm.html">CRM</a>
+      <a href="assets/pages/admin.html">Admin</a>
     </div>
     <div class="footer-brand">
-      &copy; 2025 Raj Marketing. All Rights Reserved.
+      &copy; 2025 Raj Marketing. All Rights Reserved.<br>
+      <span class="footer-contact">📍 Mysore, India | 📱 <a href="tel:+919876543210">+91-9876543210</a></span>
     </div>
   </footer>
-  <script>
-    // Splash loading animation with shiny text
-window.addEventListener('DOMContentLoaded', () => {
-  const splash = document.getElementById('splash');
-  setTimeout(() => { splash.style.opacity = '0'; }, 1600);
-  setTimeout(() => { splash.style.display = 'none'; }, 1800);
-});
 
-// Side menu open/close
-const menuBtn = document.getElementById('menu-btn');
-const sideMenu = document.getElementById('side-menu');
-const closeMenu = document.getElementById('close-menu');
-const backdrop = document.getElementById('side-menu-backdrop');
-if (menuBtn && sideMenu && closeMenu && backdrop) {
-  menuBtn.onclick = () => { sideMenu.classList.add('active'); backdrop.classList.add('active'); }
-  closeMenu.onclick = () => { sideMenu.classList.remove('active'); backdrop.classList.remove('active'); }
-  backdrop.onclick = () => { sideMenu.classList.remove('active'); backdrop.classList.remove('active'); }
-}
-
-// Simple slider logic for all sliders
-function sliderInit(sliderId, prevBtnId, nextBtnId) {
-  const slider = document.getElementById(sliderId);
-  const prev = document.getElementById(prevBtnId);
-  const next = document.getElementById(nextBtnId);
-
-  if (!slider || !prev || !next) return;
-  let slideWidth = slider.children[0].offsetWidth + 18;
-  prev.onclick = () => {
-    slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
-  }
-  next.onclick = () => {
-    slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
-  }
-}
-sliderInit('promo-slider', 'promo-prev', 'promo-next');
-sliderInit('ad-slider', 'ad-prev', 'ad-next');
-sliderInit('product-slider', 'prod-prev', 'prod-next');
-  </script>
+  <script src="js/script.js"></script>
 </body>
-</html>
+          </html>
