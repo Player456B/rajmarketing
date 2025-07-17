@@ -557,4 +557,55 @@
           `).join('')}
         </table>
         </div>
-        <div style="marg
+        <div style="margin-top:0.5em;max-width:330px;font-size:0.98em;">
+          <div><b>Total Qty:</b> ${totalQty}</div>
+          <div><b>Total Sqft:</b> ${totalSqft.toFixed(2)}</div>
+          <div><b>Total Price:</b> ₹${totalPrice.toFixed(2)}</div>
+          <div><b>Discount:</b> ${discount}% (₹${(totalPrice*discount/100).toFixed(2)})</div>
+          <div><b>Sub Total:</b> ₹${afterDiscount.toFixed(2)}</div>
+          <div><b>GST(18%):</b> ₹${gst.toFixed(2)}</div>
+          <div style="font-size:1.05em;color:#1fc8db;font-weight:700;"><b>Final Price (Incl. GST):</b> ₹${finalPrice.toFixed(2)}</div>
+        </div>
+        <div style="margin-top:1.2em;font-size:0.93em;color:#888;">Thank you for choosing <b>Raj Marketing</b>!</div>
+      `;
+      document.getElementById('previewBox').innerHTML = preview;
+      document.getElementById('previewBox').style.display = '';
+      document.getElementById('toPdfBtn').style.display = '';
+    }
+    // PDF logic: single-page fit for A4 and mobile
+    function downloadPDF() {
+      const preview = document.getElementById('previewBox');
+      // Set width for single A4 page (portrait, 595pt width)
+      const pdfWidth = 575; // a4 width minus margin
+      html2canvas(preview, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#fff",
+        width: preview.scrollWidth,
+        windowWidth: preview.scrollWidth
+      }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png', 1.0);
+        const pdf = new window.jspdf.jsPDF({
+          orientation: 'portrait',
+          unit: 'pt',
+          format: 'a4'
+        });
+        // Fit image to page width (a4 width: 595pt, margin: 10pt)
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        let imgWidth = pdfWidth;
+        let imgHeight = canvas.height * (imgWidth / canvas.width);
+        // If image too tall, scale down height to fit one page
+        if (imgHeight > pageHeight - 30) {
+          imgHeight = pageHeight - 30;
+          imgWidth = canvas.width * (imgHeight / canvas.height);
+        }
+        // Center image horizontally
+        const xOffset = (pageWidth - imgWidth) / 2;
+        pdf.addImage(imgData, 'PNG', xOffset, 15, imgWidth, imgHeight, '', 'FAST');
+        pdf.save('Estimate-' + document.getElementById('estId').textContent.replace("Estimate ID: ", "").split('|')[0].trim() + '.pdf');
+      });
+    }
+  </script>
+</body>
+</html>
