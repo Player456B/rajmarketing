@@ -7,140 +7,410 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
   <link rel="icon" href="../images/logo.svg">
   <style>
-    :root { --primary: #0e2a47; --secondary: #3bb4f2; --dark-yellow: #ffd600; --gold: #ffd700; --silver: #d0d0d0; --bronze: #b08d57; --white: #fff; }
-    body { background: var(--primary); color: var(--white); font-family: 'Poppins', sans-serif; margin: 0; }
-    .cover { height: 140px; width: 100%; border-radius: 0 0 32px 32px; position: relative; box-shadow: 0 6px 24px #0003; }
-    .profile-box { display: flex; flex-direction: column; align-items: center; margin-top: -65px; z-index: 2; position: relative; }
-    .profile-pic { width: 110px; height: 110px; border-radius: 50%; border: 4px solid #fff; background: #18345a; object-fit: cover; box-shadow: 0 2px 20px #0005; }
-    .upload-btn { position: absolute; right: 22vw; top: 101px; background: var(--secondary); color: #fff; border: none; padding: 0.36em 0.9em; border-radius: 10px; font-size: 0.97em; cursor:pointer; box-shadow:0 2px 8px #0002;}
-    @media (max-width: 600px) { .upload-btn { right: 2vw; } }
-    .cover-select { position: absolute; right: 16px; top: 14px;}
-    .cover-swatches { display: flex; gap: 7px;}
-    .swatch { width: 28px; height: 28px; border-radius: 7px; border: 2px solid #fff; cursor: pointer; box-shadow: 0 2px 10px #0002; }
-    .swatch.selected { border: 3px solid var(--dark-yellow);}
-    .info-area { margin: 0.7em 1em 1.6em 1em; }
-    .c-name { color: var(--dark-yellow); font-size: 1.5em; font-weight: 700; text-align: center; letter-spacing:0.6px; margin-bottom:0.1em;}
-    .c-info { color: #cbe7fa; text-align: center; margin: .2em 0 .5em;}
-    .c-id { color: var(--secondary); text-align: center; font-size: 1.1em; }
-    .card-area { margin: 1.5em 1em 1.8em 1em;}
-    .member-cards { display: flex; gap: 1em; justify-content: center; margin: 1.5em 0 0.5em 0;}
-    .m-card { min-width: 120px; background: #292929; border-radius: 13px; padding: 1.1em 1em; color: #fff; text-align: center; box-shadow: 0 2px 14px #0003; cursor: pointer; transition: transform .25s; }
-    .m-card.gold { background: linear-gradient(120deg,#ffd700,#ffeb66);}
-    .m-card.silver { background: linear-gradient(120deg,#d0d0d0,#fff);}
-    .m-card.bronze { background: linear-gradient(120deg,#b08d57,#ffe7b2);}
-    .m-card.animated { transform: scale(1.09) rotate(-2deg);}
-    .member-pay { margin-top: 0.7em; text-align: center; }
-    .member-pay button { background: var(--secondary); color: #fff; border: none; padding: 0.5em 1.4em; border-radius: 7px; font-weight: 600; cursor: pointer; margin: 0 0.5em;}
-    .member-status { text-align: center; color: var(--gold); font-weight: 700; }
-    .menu { display: flex; justify-content: space-around; align-items: center; background: #112945; border-radius: 19px 19px 0 0; position: sticky; bottom: 0; left: 0; right: 0; z-index: 10; margin-top: 0.6em; padding: 0.3em 0.12em; box-shadow: 0 -2px 12px #0003; }
-    .menu a { flex: 1; text-align: center; color: var(--white); font-size: 0.97em; padding: 0.5em 0;}
-    .menu span { display: block;}
-    .menu a span:first-child { font-size: 1.18em; margin-bottom: 0.1em;}
-    .form-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #0006; z-index: 9999; align-items: center; justify-content: center; }
-    .form-modal.active { display: flex;}
-    .modal-box { background: #18345a; padding: 2em 1.2em; border-radius: 14px; max-width: 340px; width: 93vw; box-shadow: 0 2px 18px #0005;}
-    .modal-box h3 { color: var(--dark-yellow);}
-    .modal-box label { color: var(--secondary); font-weight: 600;}
-    .modal-box input, .modal-box textarea { width: 100%; margin-top: 0.2em; border: none; border-radius: 7px; padding: 0.65em;}
-    .modal-box button { background: var(--secondary); color: #fff; border: none; border-radius: 7px; margin-top: 1em; padding: 0.55em 1.2em; font-weight: 600;}
-    .close-btn { position: absolute; right: 7vw; top: 7vh; background: var(--dark-yellow); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.2em; cursor: pointer;}
-    .invest-area { margin-bottom: 5em; }
-    .invest-slider { display: flex; overflow-x: auto; gap: 1em; padding: 1em 0;}
-    .invest-slide { min-width: 215px; background: #23406c; border-radius: 13px; padding: 1em 1em; box-shadow: 0 2px 16px #0003; color: #ffd600; }
-    .invest-title { font-weight: 700; color: #ffd600;}
-    .invest-desc { color: #cbe7fa; font-size: 0.98em;}
-    footer { background: #0e233a; text-align: center; padding: 1.2em 0 0.7em 0; font-size: 0.93em; color: #e3e3e3; border-radius: 14px 14px 0 0; margin-top: 3em;}
-    footer a { color: var(--dark-yellow);}
-    @media (max-width: 520px) {
-      .profile-pic { width: 95px; height: 95px;}
+    :root {
+      --primary: #0e2a47;
+      --secondary: #3bb4f2;
+      --dark-yellow: #ffd600;
+      --gold: #ffd700;
+      --silver: #d0d0d0;
+      --bronze: #b08d57;
+      --white: #fff;
     }
+    body {
+      background: var(--primary);
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      padding: 1em 1.2em 0 1.2em;
+    }
+    .menu-btn {
+      font-size: 2em;
+      background: none;
+      border: none;
+      color: var(--dark-yellow);
+      cursor: pointer;
+      margin-right: 1em;
+    }
+    .brand-title {
+      color: var(--dark-yellow);
+      font-weight: 700;
+      font-size: 1.18em;
+      letter-spacing: 1px;
+    }
+    .main-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 1.5em;
+      margin: 1em auto 0 auto;
+      max-width: 1150px;
+      min-height: 200px;
+      padding: 0 1em;
+    }
+    .profile-side {
+      flex: 1 1 180px;
+      max-width: 230px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: 0.5em;
+    }
+    .profile-photo-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      position: relative;
+      margin-bottom: 1.1em;
+    }
+    .profile-pic {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid var(--secondary);
+      background: #eaf6fc;
+      object-fit: cover;
+      margin-bottom: 0.5em;
+      box-shadow: 0 2px 14px #0003;
+    }
+    .upload-btn {
+      margin-top: 0.13em;
+      background: var(--secondary);
+      color: #fff;
+      border: none;
+      padding: 0.4em 1.1em;
+      border-radius: 8px;
+      font-size: 0.97em;
+      cursor:pointer;
+      box-shadow: 0 2px 8px #0002;
+    }
+    .profile-details {
+      flex: 3 1 400px;
+      background: #18345a;
+      margin-left: 0;
+      margin-top: 0.2em;
+      border-radius: 13px;
+      padding: 1em 1.5em;
+      box-shadow: 0 2px 18px #0002;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+    }
+    .c-name {
+      color: var(--dark-yellow);
+      font-weight: 700;
+      font-size: 1.4em;
+      margin-bottom: .15em;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 12px #0006;
+    }
+    .c-info-label {
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 1em;
+      margin-top:0.7em;
+      margin-bottom: 0.17em;
+    }
+    .c-info {
+      color: #cbe7fa;
+      font-size: 1em;
+      margin-bottom: 0.23em;
+      word-break: break-all;
+    }
+    .c-id {
+      color: var(--secondary);
+      font-weight: 600;
+      margin-top: 0.5em;
+      font-size: 1.09em;
+      letter-spacing: 0.4px;
+    }
+    .cover-swatches { margin-top:1.2em; display: flex; gap: 6px;}
+    .swatch {
+      width: 25px; height: 25px; border-radius: 7px; border: 2px solid #fff;
+      cursor: pointer; box-shadow: 0 2px 10px #0002;
+      outline: none;
+    }
+    .swatch.selected { border: 3px solid var(--dark-yellow);}
+    /* Side Menu */
+    #side-menu {
+      position: fixed;
+      left: -260px;
+      top: 0;
+      width: 250px;
+      height: 100vh;
+      background: #18345a;
+      box-shadow: 2px 0 18px #0008;
+      z-index: 9999;
+      transition: left 0.28s;
+      padding-top: 1.7em;
+    }
+    #side-menu.active { left: 0;}
+    #side-menu-backdrop {
+      display: none;
+    }
+    #side-menu-backdrop.active {
+      display: block;
+      position:fixed; left:0;top:0;width:100vw;height:100vh;z-index:9998;background:rgba(0,0,0,0.16);
+    }
+    .side-menu-header { padding: 0.4em 1em 1em 1.2em; color: var(--dark-yellow); font-weight:700; font-size:1.14em;}
+    .side-menu ul { list-style: none; padding: 0 1.1em;}
+    .side-menu li { margin: 1em 0;}
+    .side-menu a { color: var(--white); font-size: 1.04em; display: flex; align-items: center; gap: 10px; font-weight: 600;}
+    .side-menu hr {margin: .6em 0; opacity:0.24;}
+    /* Slider */
+    .slider-section {background: var(--primary); margin: 1.3em 0;}
+    .slider {display: flex;overflow-x: auto;scroll-behavior: smooth;gap: 1em;padding: 1em 0.5em;}
+    .slide {
+      background: #18345a;
+      border-radius: 13px;
+      min-width: 235px; max-width: 250px;
+      margin-right: 0.6em; padding: 1em 1em;
+      display: flex; align-items: center; gap: 1em;
+      box-shadow: 0 2px 16px rgba(50,40,100,0.15);
+      color: #fff;
+      font-size: 1.01em;
+      font-weight: 500;
+    }
+    .promo-icon { font-size: 2em; margin-right: 0.3em; display:inline-block; width:48px; text-align:center;}
+    .promo-title { font-weight: 700; color: var(--dark-yellow); font-size: 1.05em;}
+    .promo-desc { font-size: 0.97em; color: #cbe7fa;}
+    /* Premium cards */
+    .member-cards {
+      display: flex;
+      gap: 1em;
+      justify-content: center;
+      margin: 2.1em 0 1em 0;
+    }
+    .m-card {
+      min-width: 160px;
+      background: #292929;
+      border-radius: 14px;
+      padding: 1.3em 1em;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 2px 14px #0003;
+      cursor: pointer;
+      font-size: 1.14em;
+      transition: transform .32s, box-shadow .16s;
+      position: relative;
+      overflow: hidden;
+    }
+    .m-card.gold { background: linear-gradient(120deg,#ffd700,#ffeb66); color: #925900;}
+    .m-card.silver { background: linear-gradient(120deg,#d0d0d0,#fff); color: #385777;}
+    .m-card.bronze { background: linear-gradient(120deg,#b08d57,#ffe7b2); color: #613c07;}
+    .m-card.animated { transform: scale(1.12) rotate(-1deg); box-shadow:0 6px 22px #0005;}
+    .m-card .m-title { font-weight: 700; font-size:1.2em;}
+    .m-card .m-price { font-size:1.1em; font-weight:600;}
+    .m-card .m-desc { font-size:0.97em; margin-top:0.7em;}
+    /* Lower menu static */
+    .lower-menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #112945;
+      border-radius: 18px 18px 0 0;
+      margin: 2.2em auto 0 auto;
+      max-width: 660px;
+      padding: 0.6em 0.2em;
+      box-shadow: 0 -2px 12px #0003;
+    }
+    .lower-menu a {
+      flex: 1;
+      text-align: center;
+      color: var(--white);
+      font-size: 1.08em;
+      padding: 0.6em 0;
+      border: none;
+      background: none;
+      font-weight: 600;
+      transition: background .16s, color .16s;
+      border-radius: 12px;
+      margin: 0 1px;
+      cursor: pointer;
+    }
+    .lower-menu a:hover,
+    .lower-menu a.active {
+      background: var(--secondary);
+      color: var(--primary);
+    }
+    /* Order Now form modal */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      top:0; left:0; width:100vw; height:100vh;
+      background: #0007;
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-bg.active { display: flex;}
+    .modal-box {
+      background: #18345a;
+      border-radius: 14px;
+      padding: 2em 1.1em 1.2em 1.1em;
+      min-width: 300px;
+      max-width: 95vw;
+      box-shadow: 0 3px 24px #0006;
+      color: #fff;
+      position: relative;
+    }
+    .modal-box label { color: var(--dark-yellow); font-weight: 600; }
+    .modal-box select, .modal-box input {
+      width: 100%; margin-top:0.3em; margin-bottom:1em;
+      border-radius: 7px; border: none; padding: 0.7em; font-size: 1.08em; color: #18345a;
+    }
+    .modal-box button {
+      background: var(--secondary); color: #fff;
+      border: none; border-radius: 8px;
+      font-weight: 700; font-size: 1.09em;
+      padding: 0.6em 1.6em; margin-top: 1.1em; cursor: pointer; width:100%;
+    }
+    .close-btn {
+      position: absolute; right: 8px; top: 8px;
+      background: var(--dark-yellow); border: none; border-radius: 12px;
+      width: 28px; height: 28px; font-size: 1.12em; cursor: pointer; color: #18345a;
+    }
+    .modal-success {
+      color: #29f98f;
+      margin-top: 1em;
+      font-weight: 600;
+      text-align: center;
+      font-size: 1.13em;
+    }
+    .modal-gold { color: var(--gold); font-weight: bold;}
+    .modal-silver { color: var(--secondary); font-weight: bold;}
+    .modal-error { color: #ffb542;}
+    /* Responsive */
+    @media (max-width: 900px) {
+      .main-content {flex-direction: column; align-items: stretch;}
+      .profile-side, .profile-details {align-items: flex-start;}
+      .profile-side {align-items: flex-end;}
+    }
+    @media (max-width: 600px) {
+      .profile-details { padding: 1em 0.7em;}
+      .main-content {padding: 0 0.4em;}
+      .lower-menu {max-width: 99vw;}
+      .member-cards { flex-direction: column; align-items:center;}
+      .slider .slide {min-width: 78vw; max-width: 90vw;}
+    }
+    /* Footer */
+    footer {
+      background: #0e233a;
+      text-align: center;
+      padding: 1.2em 0 0.7em 0;
+      font-size: 0.93em;
+      color: #e3e3e3;
+      border-radius: 14px 14px 0 0;
+      margin-top: 2em;
+    }
+    footer a { color: var(--dark-yellow);}
   </style>
 </head>
 <body>
-  <div id="cover" class="cover"></div>
-  <div class="profile-box">
-    <img src="../images/default-profile.png" id="profilePic" class="profile-pic" alt="Profile Photo">
-    <input type="file" id="profileUpload" accept="image/*" style="display:none">
-    <button class="upload-btn" onclick="document.getElementById('profileUpload').click()">Photo</button>
-    <div class="cover-select">
-      <div class="cover-swatches" id="coverSwatches"></div>
-    </div>
+  <!-- Side Menu -->
+  <nav id="side-menu" class="side-menu">
+    <div class="side-menu-header">Menu</div>
+    <ul>
+      <li><a href="#" onclick="openPage('order')">🛒 Order Now</a></li>
+      <li><a href="#" onclick="openPage('price')">💵 Price Check</a></li>
+      <li><a href="#" onclick="openPage('myorder')">📄 My Order</a></li>
+      <li><a href="#" onclick="openPage('payment')">💳 Payment</a></li>
+      <li><a href="#" onclick="openPage('orderstatus')">🚚 Order Status</a></li>
+      <hr>
+      <li><a href="login.html" onclick="logout()">🚪 Logout</a></li>
+    </ul>
+  </nav>
+  <div id="side-menu-backdrop"></div>
+  <div class="topbar">
+    <button class="menu-btn" id="menu-btn">&#9776;</button>
+    <span class="brand-title">Raj Marketing</span>
   </div>
-  <div class="info-area">
-    <div class="c-name" id="cName"></div>
-    <div class="c-info"><span id="cPhone"></span> | <span id="cEmail"></span></div>
-    <div class="c-info"><span>Joined: <span id="cJoin"></span></span></div>
-    <div class="c-id" id="cID"></div>
-  </div>
-  <div class="card-area">
-    <div class="member-cards">
-      <div class="m-card gold" id="goldCard" onclick="animateCard('gold')">
-        <div style="font-size:1.6em;">🥇</div>
-        <div style="font-weight:700;">Gold</div>
-        <div style="font-size:1.2em;">₹1000</div>
-        <div style="font-size:0.98em; margin-top:0.35em;color:#444;">VIP benefits, free annual service, highest referral bonus</div>
-      </div>
-      <div class="m-card silver" id="silverCard" onclick="animateCard('silver')">
-        <div style="font-size:1.6em;">🥈</div>
-        <div style="font-weight:700;">Silver</div>
-        <div style="font-size:1.2em;">₹500</div>
-        <div style="font-size:0.98em; margin-top:0.35em;color:#444;">Standard member, discounted service, referral rewards</div>
-      </div>
-      <div class="m-card bronze" id="bronzeCard" onclick="animateCard('bronze')">
-        <div style="font-size:1.6em;">🥉</div>
-        <div style="font-weight:700;">Bronze</div>
-        <div style="font-size:1.2em;">₹250</div>
-        <div style="font-size:0.98em; margin-top:0.35em;color:#444;">Basic access, member-only offers, loyalty points</div>
+
+  <div class="main-content">
+    <div class="profile-side">
+      <div class="profile-photo-box">
+        <img src="../images/default-profile.png" id="profilePic" class="profile-pic" alt="Profile Photo">
+        <input type="file" id="profileUpload" accept="image/*" style="display:none">
+        <button class="upload-btn" onclick="document.getElementById('profileUpload').click()">Upload</button>
+        <div class="cover-swatches" id="coverSwatches"></div>
       </div>
     </div>
-    <div class="member-pay" id="memberPayArea">
-      <span style="color:#cbe7fa;">Choose your membership card and click to pay securely:</span><br>
-      <button onclick="payMember('gold')">Pay Gold ₹1000</button>
-      <button onclick="payMember('silver')">Pay Silver ₹500</button>
-      <button onclick="payMember('bronze')">Pay Bronze ₹250</button>
-    </div>
-    <div class="member-status" id="memberStatus"></div>
-  </div>
-  <div class="menu shadow">
-    <a href="#" onclick="openForm('appointment')"><span>📅</span><span>Appointment</span></a>
-    <a href="#" onclick="openForm('price')"><span>💵</span><span>Price Check</span></a>
-    <a href="#" onclick="openForm('estimate')"><span>🧮</span><span>Estimate</span></a>
-    <a href="#" onclick="openForm('order')"><span>🚚</span><span>Order Tracker</span></a>
-    <a href="#" onclick="openForm('payment')"><span>💳</span><span>Payment</span></a>
-    <a href="#" onclick="openForm('complaint')"><span>📢</span><span>Complaint</span></a>
-    <a href="#" onclick="openForm('rework')"><span>🔁</span><span>Rework Status</span></a>
-  </div>
-  <!-- Modal for forms -->
-  <div id="formModal" class="form-modal"><div class="modal-box" id="modalBox"></div><button class="close-btn" onclick="closeModal()">✖️</button></div>
-  <div class="invest-area">
-    <h2 style="color:#ffd600;text-align:center;">Investment Opportunities</h2>
-    <div class="invest-slider" id="investSlider">
-      <div class="invest-slide">
-        <div class="invest-title">Franchise Partner</div>
-        <div class="invest-desc">Become a Raj Marketing franchise in your city. Low investment, high returns, and full business support!</div>
-      </div>
-      <div class="invest-slide">
-        <div class="invest-title">Referral Investor</div>
-        <div class="invest-desc">Refer customers and earn commission on every sale. No fixed cost, unlimited earnings!</div>
-      </div>
-      <div class="invest-slide">
-        <div class="invest-title">Bulk Buyer Program</div>
-        <div class="invest-desc">Invest in bulk orders at discounted rates, and resell in your network for higher profits.</div>
-      </div>
-      <div class="invest-slide">
-        <div class="invest-title">Service Partner</div>
-        <div class="invest-desc">Join as a certified installer or service partner. Training, leads & growth with Raj Marketing Mysore.</div>
-      </div>
+    <div class="profile-details">
+      <div class="c-name" id="cName"></div>
+      <div class="c-info-label">Contact</div>
+      <div class="c-info" id="cPhone"></div>
+      <div class="c-info-label">Email</div>
+      <div class="c-info" id="cEmail"></div>
+      <div class="c-info-label">Join Date</div>
+      <div class="c-info" id="cJoin"></div>
+      <div class="c-id" id="cID"></div>
     </div>
   </div>
+
+  <!-- Promotion Slider -->
+  <section class="slider-section">
+    <div class="slider shadow" id="promo-slider">
+      <div class="slide"><span class="promo-icon">💰</span><div><div class="promo-title">Best Price!</div><div class="promo-desc">Unbeatable deals for every home</div></div></div>
+      <div class="slide"><span class="promo-icon">⚡</span><div><div class="promo-title">Quick Install</div><div class="promo-desc">Fast, hassle-free service</div></div></div>
+      <div class="slide"><span class="promo-icon">🛡️</span><div><div class="promo-title">Safe & Durable</div><div class="promo-desc">Premium quality, lasting protection</div></div></div>
+      <div class="slide"><span class="promo-icon">✂️</span><div><div class="promo-title">Custom Size</div><div class="promo-desc">Perfect fit for every window & door</div></div></div>
+      <div class="slide"><span class="promo-icon">🏆</span><div><div class="promo-title">Top Rated</div><div class="promo-desc">Hundreds of happy customers</div></div></div>
+      <div class="slide"><span class="promo-icon">🚚</span><div><div class="promo-title">Free Delivery</div><div class="promo-desc">Across Mysore city limits</div></div></div>
+      <div class="slide"><span class="promo-icon">📞</span><div><div class="promo-title">Support 24/7</div><div class="promo-desc">Always here for you</div></div></div>
+      <div class="slide"><span class="promo-icon">🔒</span><div><div class="promo-title">Secure</div><div class="promo-desc">Child & pet friendly mesh</div></div></div>
+      <div class="slide"><span class="promo-icon">☎️</span><div><div class="promo-title">Call Now</div><div class="promo-desc">(+91) 9483037385 </div></div></div>
+    </div>
+  </section>
+
+  <!-- Premium Cards -->
+  <div class="member-cards">
+    <div class="m-card gold" id="goldCard" onclick="showPayment('gold')">
+      <div class="m-title">🥇 Gold</div>
+      <div class="m-price">₹1000</div>
+      <div class="m-desc">VIP benefits, free annual service, highest referral bonus</div>
+    </div>
+    <div class="m-card silver" id="silverCard" onclick="showPayment('silver')">
+      <div class="m-title">🥈 Silver</div>
+      <div class="m-price">₹500</div>
+      <div class="m-desc">Standard member, discounted service, referral rewards</div>
+    </div>
+    <div class="m-card bronze" id="bronzeCard" onclick="showPayment('bronze')">
+      <div class="m-title">🥉 Bronze</div>
+      <div class="m-price">₹250</div>
+      <div class="m-desc">Basic access, member-only offers, loyalty points</div>
+    </div>
+  </div>
+
+  <!-- Lower menu static -->
+  <nav class="lower-menu shadow">
+    <a href="#" onclick="openPage('order')">🛒 Order Now</a>
+    <a href="#" onclick="openPage('price')">💵 Price Check</a>
+    <a href="#" onclick="openPage('myorder')">📄 My Order</a>
+    <a href="#" onclick="openPage('payment')">💳 Payment</a>
+    <a href="#" onclick="openPage('orderstatus')">🚚 Order Status</a>
+  </nav>
+
+  <!-- Modal Order Now -->
+  <div id="modal-bg" class="modal-bg">
+    <div class="modal-box" id="modalBox"></div>
+    <button class="close-btn" onclick="closeModal()">✖️</button>
+  </div>
+
+  <!-- Footer -->
   <footer>
     <div>
       &copy; 2025 Raj Marketing Mysore. All Rights Reserved.<br>
-      <span>📍 Mysore, India | 📱 <a href="tel:+919483037385">+91-9483037385</a></span>
+      Contact: <a href="tel:+919483037385">+91-9483037385</a> <br>
+      <span>📍 Arvind Nagar, Mysore, India</span>
     </div>
   </footer>
 <script>
-// Gradient backgrounds
+/* --------- Customer Data ----------- */
 const gradients = [
   "linear-gradient(120deg,#0e2a47,#3bb4f2)",
   "linear-gradient(120deg,#ffd600,#ffd700)",
@@ -150,7 +420,6 @@ const gradients = [
   "linear-gradient(120deg,#d0d0d0,#18345a)",
   "linear-gradient(120deg,#18345a,#3bb4f2)"
 ];
-
 const swatchEl = document.getElementById('coverSwatches');
 gradients.forEach((g, i)=>{
   const s = document.createElement('div');
@@ -159,10 +428,9 @@ gradients.forEach((g, i)=>{
   s.onclick = ()=>setCover(i);
   swatchEl.appendChild(s);
 });
-
 function setCover(i){
   user.cover = i;
-  document.getElementById('cover').style.background = gradients[i];
+  document.body.style.background = gradients[i];
   updateSwatch();
   saveUser();
 }
@@ -171,13 +439,10 @@ function updateSwatch() {
     sw.classList.toggle('selected', idx===user.cover);
   });
 }
-
-// Load user
 let users = JSON.parse(localStorage.getItem('raj_users')||'[]');
 let phone = localStorage.getItem('raj_loggedin');
 let user = users.find(u=>u.phone===phone);
 if(!user){ window.location.href="login.html"; }
-// Generate customer ID if not present
 if(!user.id) {
   let n = user.name.replace(/[^a-zA-Z]/g,'').slice(0,4).toUpperCase();
   let p = user.phone.slice(-4);
@@ -188,8 +453,6 @@ function saveUser(){
   users = users.map(u=>u.phone===user.phone?user:u);
   localStorage.setItem('raj_users', JSON.stringify(users));
 }
-
-// Profile photo
 const profilePic = document.getElementById('profilePic');
 if(user.profile) profilePic.src = user.profile;
 document.getElementById('profileUpload').onchange = function(e){
@@ -199,114 +462,166 @@ document.getElementById('profileUpload').onchange = function(e){
     reader.onload = function(ev){
       user.profile = ev.target.result;
       profilePic.src = user.profile;
+      // Save as file: assets/customer/profile/CustomerID
       saveUser();
     };
     reader.readAsDataURL(file);
   }
 };
-
-// Cover
-document.getElementById('cover').style.background = gradients[user.cover||0];
 updateSwatch();
-
-// Info
 document.getElementById('cName').textContent = user.name;
 document.getElementById('cPhone').textContent = user.phone;
 document.getElementById('cEmail').textContent = user.email;
 document.getElementById('cJoin').textContent = user.joinDate;
 document.getElementById('cID').textContent = "Customer ID: "+user.id;
 
-// Membership
-function animateCard(type){
-  ["gold","silver","bronze"].forEach(t=>{
-    document.getElementById(t+"Card").classList.remove('animated');
-  });
-  document.getElementById(type+"Card").classList.add('animated');
-  setTimeout(()=>{
-    document.getElementById(type+"Card").classList.remove('animated');
-  },700);
+/* ------ Side Menu Logic -------- */
+const menuBtn = document.getElementById('menu-btn');
+const sideMenu = document.getElementById('side-menu');
+const backdrop = document.getElementById('side-menu-backdrop');
+menuBtn.onclick = function() {
+  sideMenu.classList.add('active');
+  backdrop.classList.add('active');
 }
-function payMember(type){
-  user.member = type;
-  user.memberPay = true;
-  saveUser();
-  updateMember();
+backdrop.onclick = function() {
+  sideMenu.classList.remove('active');
+  backdrop.classList.remove('active');
 }
-function updateMember(){
-  const area = document.getElementById('memberPayArea');
-  const status = document.getElementById('memberStatus');
-  if(user.memberPay && user.member){
-    area.style.display="none";
-    status.innerHTML = `Membership Active: <span style="text-transform:capitalize;">${user.member}</span> Card`;
-  }else{
-    area.style.display="block";
-    status.textContent='';
-  }
+function logout() {
+  localStorage.removeItem('raj_loggedin');
+  window.location.href = "login.html";
 }
-updateMember();
 
-// Menu & Forms
-const formDefs = {
-  appointment: { title:"Book Appointment", fields:[
-    {label:"Preferred Date",type:"date",name:"date",required:true},
-    {label:"Preferred Time",type:"time",name:"time",required:true},
-    {label:"Address",type:"textarea",name:"address",required:true},
-  ]},
-  price: { title:"Price Check", fields:[
-    {label:"Product Type",type:"text",name:"product",required:true},
-    {label:"Size (ft/inch)",type:"text",name:"size",required:true},
-    {label:"Additional Notes",type:"textarea",name:"notes"}
-  ]},
-  estimate: { title:"Get Estimate", fields:[
-    {label:"Product",type:"text",name:"product",required:true},
-    {label:"Total Windows/Doors",type:"number",name:"qty",required:true},
-    {label:"Site Address",type:"textarea",name:"address",required:true}
-  ]},
-  order: { title:"Order Tracker", fields:[
-    {label:"Order ID (if known)",type:"text",name:"orderid"},
-    {label:"Query",type:"textarea",name:"query",required:true}
-  ]},
-  payment: { title:"Payment", fields:[
-    {label:"Amount",type:"number",name:"amount",required:true},
-    {label:"Payment Method",type:"text",name:"method",required:true},
-    {label:"Notes",type:"textarea",name:"notes"}
-  ]},
-  complaint: { title:"Complaint", fields:[
-    {label:"Your Complaint",type:"textarea",name:"complaint",required:true}
-  ]},
-  rework: { title:"Rework Status", fields:[
-    {label:"Order/Service ID",type:"text",name:"orderid"},
-    {label:"Details",type:"textarea",name:"details",required:true}
-  ]}
-};
-function openForm(type){
-  const d = formDefs[type];
-  let html = `<h3>${d.title}</h3><form id="modalForm">`;
-  d.fields.forEach(f=>{
-    html+=`<label>${f.label}${f.required?' *':''}</label>`;
-    if(f.type==="textarea")
-      html+=`<textarea name="${f.name}" ${f.required?'required':''}></textarea>`;
-    else
-      html+=`<input name="${f.name}" type="${f.type}" ${f.required?'required':''}>`;
-  });
-  html+=`<button type="submit">Submit</button></form>`;
-  document.getElementById('modalBox').innerHTML = html;
-  document.getElementById('formModal').classList.add('active');
-  document.getElementById('modalForm').onsubmit = function(e){
+/* ------ Lower Menu and Pages -------- */
+function openPage(page) {
+  if(page==="order") { openOrderModal(); }
+  else if(page==="price") { openPriceModal(); }
+  else if(page==="myorder") { window.location.href="estimate.html#myorder"; }
+  else if(page==="payment") { window.location.href="estimate.html#payment"; }
+  else if(page==="orderstatus") { window.location.href="estimate.html#orderstatus"; }
+}
+
+/* ------ Order Now Modal -------- */
+function openOrderModal() {
+  let html = `<h3>Order Now</h3>
+    <form id="orderForm">
+      <label>Customer ID</label>
+      <input type="text" value="${user.id}" readonly>
+      <label>Name</label>
+      <input type="text" value="${user.name}" readonly>
+      <label>Type of Net *</label>
+      <select name="type" required>
+        <option value="">Select...</option>
+        <option value="Fiberglass Net">Fiberglass Net</option>
+        <option value="Aluminum Frame Net">Aluminum Frame Net</option>
+        <option value="Velcro Net">Velcro Net</option>
+        <option value="Door Net">Door Net</option>
+        <option value="Magnetic Mesh">Magnetic Mesh</option>
+        <option value="Roll-up Net">Roll-up Net</option>
+        <option value="Other/Custom">Other/Custom</option>
+      </select>
+      <button type="submit">Submit</button>
+      <div id="orderMsg" class="modal-success"></div>
+    </form>`;
+  showModal(html);
+  document.getElementById('orderForm').onsubmit = function(e){
     e.preventDefault();
-    // Store per user, per form type
-    const formData = {};
-    d.fields.forEach(f=>formData[f.name]=this[f.name].value);
-    if(!user.forms)user.forms={};
-    user.forms[type] = formData;
-    saveUser();
-    closeModal();
-    alert(d.title+" submitted successfully!");
+    const netType = this.type.value;
+    if(!netType) {
+      document.getElementById('orderMsg').textContent = "Please select a net type.";
+      document.getElementById('orderMsg').className = "modal-error";
+      return;
+    }
+    const apptDate = new Date();
+    apptDate.setDate(apptDate.getDate()+2);
+    let yyyy = apptDate.getFullYear(), mm = (apptDate.getMonth()+1).toString().padStart(2,0), dd = apptDate.getDate().toString().padStart(2,0);
+    let apptStr = `${yyyy}-${mm}-${dd}`;
+    document.getElementById('orderMsg').innerHTML = `Thank you <b>${user.name}</b>!<br>Your order for <b>${netType}</b> is received.<br>
+    Appointment Date: <b>${apptStr}</b> (9:00am-11:00am)<br>
+    Our executive officer will call and visit you for confirmation.`;
+    document.getElementById('orderMsg').className = "modal-success";
+    this.querySelector('button[type=submit]').disabled = true;
   }
 }
-function closeModal(){
-  document.getElementById('formModal').classList.remove('active');
+
+/* ------ Price Check Modal -------- */
+function openPriceModal() {
+  let html = `<h3>Price Check</h3>
+    <form id="priceForm">
+      <label>Customer ID</label>
+      <input type="text" value="${user.id}" readonly>
+      <label>Width</label>
+      <input type="number" id="widthInput" name="width" min="1" max="500" placeholder="in inches" required>
+      <label>Height</label>
+      <input type="number" id="heightInput" name="height" min="1" max="500" placeholder="in inches" required>
+      <label>Qty</label>
+      <input type="number" id="qtyInput" name="qty" min="1" max="50" required>
+      <div style="font-size:0.93em;color:#fff; margin-bottom:0.5em;">
+        <input type="radio" name="unit" value="inch" id="unitInch" checked> <label for="unitInch" style="display:inline;color:#fff;">Inches</label>
+        <input type="radio" name="unit" value="cm" id="unitCm"> <label for="unitCm" style="display:inline;color:#fff;">Centimetres</label>
+        <span style="color:#ffd600"> (Below 24inches/61cm considered 2ft)</span>
+      </div>
+      <button type="button" onclick="calculatePrice()">Calculate</button>
+      <div id="calcMsg" style="margin-top:0.7em;"></div>
+    </form>`;
+  showModal(html);
 }
+/* Price calculation */
+function calculatePrice() {
+  let w = +document.getElementById('widthInput').value;
+  let h = +document.getElementById('heightInput').value;
+  let qty = +document.getElementById('qtyInput').value;
+  let unit = document.querySelector('input[name="unit"]:checked').value;
+  if(unit==='cm') { w = w/2.54; h = h/2.54; }
+  if(w<24) w=24;
+  if(h<24) h=24;
+  let sqft = ((w*h)/144)*qty;
+  let price = Math.round(sqft * 135); // Demo price logic per sqft
+  document.getElementById('calcMsg').innerHTML =
+    `<span class="modal-gold">Total Sqft: ${sqft.toFixed(2)}</span><br>
+    <span class="modal-silver">Total Price: ₹${price}</span>`;
+}
+  /* ------ Payment Modal for Card -------- */
+function showPayment(type) {
+  let title = type==="gold"?"Gold":"";
+  if(type==="silver") title="Silver";
+  if(type==="bronze") title="Bronze";
+  let amt = type==="gold"?1000:type==="silver"?500:250;
+  let html = `<h3>${title} Membership Payment</h3>
+    <div style="font-size:1.15em;margin-bottom:1em;">
+      Amount: <b>₹${amt}</b>
+    </div>
+    <div style="color:#cbe7fa;margin-bottom:1em;">
+      Pay & enjoy exclusive <b>${title}</b> benefits!
+    </div>
+    <button type="button" onclick="paymentSuccess('${title}')">Pay Now</button>
+    <div id="paymentMsg" class="modal-success"></div>`;
+  showModal(html);
+}
+function paymentSuccess(title){
+  document.getElementById('paymentMsg').textContent = `Payment for ${title} Membership Successful! Thank you.`;
+}
+
+/* ------ Modal Logic -------- */
+function showModal(html) {
+  document.getElementById('modalBox').innerHTML = html;
+  document.getElementById('modal-bg').classList.add('active');
+}
+function closeModal() {
+  document.getElementById('modal-bg').classList.remove('active');
+}
+
+/* ------ Slider Logic -------- */
+const promoSlider = document.getElementById('promo-slider');
+let current = 0, slides = promoSlider.children, len = slides.length;
+function autoSlide() {
+  for(let i=0;i<len;i++) slides[i].style.opacity = '0.4';
+  slides[current].scrollIntoView({behavior:'smooth',inline:'center'});
+  slides[current].style.opacity = '1';
+  current = (current+1)%len;
+  setTimeout(autoSlide, 2100);
+}
+setTimeout(autoSlide, 1200);
 </script>
 </body>
-  </html>
+</html>
