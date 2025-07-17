@@ -5,125 +5,140 @@
   <title>Estimate Form | Raj Marketing</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     :root {
-      --primary: #0e2a47;
-      --secondary: #3bb4f2;
-      --dark-yellow: #ffd600;
-      --gold: #ffd700;
+      --primary: #191970;
+      --secondary: #1fc8db;
+      --accent: #f9d423;
       --white: #fff;
-      --shadow: 0 2px 14px rgba(30,40,80,0.16);
+      --gray: #f6f8fa;
+      --shadow: 0 4px 24px rgba(25,25,112,0.08);
+      --border-radius: 16px;
+      --spacing: 1.25em;
     }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f7fbff;
+    html, body {
       margin: 0;
       padding: 0;
-      color: #222;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #fdfcfb 0%, #e2d1c3 100%);
+      color: #23213d;
+      min-height: 100vh;
     }
-    .estimate-wrapper {
-      max-width: 880px;
+    .estimate-container {
+      max-width: 650px;
       margin: 2em auto;
-      background: #fff;
-      border-radius: 14px;
+      background: var(--white);
+      border-radius: var(--border-radius);
       box-shadow: var(--shadow);
-      padding: 2em 2.2em 2.5em 2.2em;
-      position: relative;
+      overflow: hidden;
+      padding: 0;
+      transition: box-shadow .2s;
     }
     .estimate-header {
+      background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
+      color: var(--white);
+      padding: 2em 1.4em 1.3em 1.4em;
       display: flex;
-      align-items: center;
-      border-bottom: 2px solid #eaeaea;
-      padding-bottom: 1.5em;
-      margin-bottom: 2em;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
     }
     .estimate-logo {
-      width: 85px;
-      height: 85px;
+      width: 64px;
+      height: 64px;
       object-fit: contain;
-      margin-right: 2em;
-    }
-    .estimate-title-group {
-      flex: 1;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px #0002;
+      background: #fff;
+      margin-bottom: 1em;
     }
     .estimate-title {
       font-size: 2em;
       font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 0.3em;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.15em;
+      text-shadow: 0 1px 6px #0002;
     }
-    .estimate-id {
+    .estimate-id-date {
+      font-size: 1em;
+      color: var(--accent);
       font-weight: 600;
-      color: var(--secondary);
-      font-size: 1.08em;
+      margin-bottom: 0.3em;
+      letter-spacing: 0.03em;
     }
-    .estimate-form-section {
-      margin-bottom: 2em;
+    form {
+      padding: 2em 1.4em 1.2em 1.4em;
     }
     .form-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.3em;
-      margin-bottom: 1.2em;
+      gap: 1.2em;
+      margin-bottom: 1.1em;
     }
     .form-group {
-      flex: 1 1 200px;
-      min-width: 180px;
-      margin-bottom: 0.5em;
+      flex: 1 1 180px;
+      min-width: 150px;
+      margin-bottom: 0.4em;
+      display: flex;
+      flex-direction: column;
     }
     .form-group label {
       font-weight: 600;
+      margin-bottom: 0.23em;
       color: var(--primary);
       font-size: 1em;
-      display: block;
-      margin-bottom: 0.27em;
+      letter-spacing: 0.01em;
     }
     .form-group input,
     .form-group select,
     .form-group textarea {
-      width: 100%;
-      padding: 0.45em 0.7em;
+      padding: 0.5em 0.8em;
       border-radius: 7px;
-      border: 1px solid #c8e3fa;
+      border: 1.4px solid #c3d6ef;
       font-size: 1em;
-      background: #f8fcff;
+      background: #f5fafc;
       color: #1b2e4b;
       outline: none;
-      box-sizing: border-box;
       transition: border .17s;
+      font-family: inherit;
+      resize: none;
     }
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border: 1.5px solid var(--secondary);
+      border: 1.6px solid var(--secondary);
     }
     .estimate-table-section {
-      margin-bottom: 2em;
+      margin-bottom: 1.2em;
+      overflow-x: auto;
     }
     .estimate-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 1em;
-      margin-bottom: 0.7em;
-      background: #f8fcff;
-      border-radius: 8px;
+      margin-bottom: 0.6em;
+      background: var(--gray);
+      border-radius: 9px;
       overflow: hidden;
+      min-width: 650px;
       box-shadow: 0 1px 8px #0001;
     }
     .estimate-table th, .estimate-table td {
-      border: 1px solid #e3ebf7;
-      padding: 0.6em 0.7em;
+      border: 1px solid #e0eafc;
+      padding: 0.5em 0.4em;
       text-align: center;
     }
     .estimate-table th {
-      background: var(--primary);
-      color: var(--white);
+      background: linear-gradient(90deg,#1fc8db .8%,#191970 90%);
+      color: #fff;
       font-weight: 700;
       font-size: 1.01em;
+      letter-spacing: 0.01em;
     }
     .estimate-table td input,
     .estimate-table td select {
-      width: 90%;
+      width: 100%;
       padding: 0.3em 0.5em;
       font-size: 1em;
       border-radius: 5px;
@@ -133,46 +148,54 @@
       text-align: center;
     }
     .add-row-btn {
-      margin-top: 0.4em;
+      margin: 0.6em 0;
       background: var(--secondary);
       color: #fff;
       border: none;
-      padding: 0.43em 1.1em;
-      border-radius: 6px;
+      padding: 0.45em 1.2em;
+      border-radius: 7px;
       font-size: 1em;
       cursor: pointer;
       font-weight: 600;
       transition: background .18s;
       box-shadow: 0 2px 8px #0002;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
     }
-    .add-row-btn:hover {
-      background: #1e8fd1;
+    .add-row-btn .material-icons {
+      font-size: 1.3em;
+      vertical-align: middle;
     }
+    .add-row-btn:hover { background: #109cb9; }
     .calc-btn {
-      margin-top: 1.3em;
-      background: var(--dark-yellow);
+      margin-top: 1em;
+      background: var(--accent);
       color: var(--primary);
       border: none;
-      padding: 0.65em 2.1em;
+      padding: 0.65em 2em;
       border-radius: 8px;
-      font-size: 1.12em;
+      font-size: 1.13em;
       cursor: pointer;
       font-weight: 700;
       transition: background .18s;
       box-shadow: 0 2px 15px #ffd60033;
       display: block;
       margin-left: auto;
+      margin-right: 0;
     }
+    .calc-btn:hover { background: #fcbb03; }
     .totals-box {
-      margin-top: 1.4em;
-      padding: 1.1em 1.2em;
-      background: #f7f8fd;
+      margin-top: 1.3em;
+      padding: 1.1em 1em 1em 1em;
+      background: linear-gradient(90deg, #e7f2ff 60%, #e2d1c3 100%);
       border-radius: 9px;
       box-shadow: 0 2px 8px #0001;
-      font-size: 1.1em;
+      font-size: 1.08em;
       color: #19344c;
-      max-width: 410px;
+      max-width: 420px;
       margin-left: auto;
+      margin-right: 0;
     }
     .totals-box label {
       font-weight: 600;
@@ -182,14 +205,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 0.5em;
+      margin-bottom: 0.45em;
+    }
+    .totals-row input[type="number"] {
+      width: 70px;
+      margin-left: 8px;
+      font-size: 1em;
     }
     .data-preview {
       margin: 2em 0 0 0;
-      background: #fff;
+      background: #fafbf9;
       border-radius: 12px;
-      padding: 2em;
+      padding: 1.85em 1.1em 1.2em 1.1em;
       box-shadow: 0 2px 18px #0001;
+      font-size: 1.03em;
     }
     .pdf-btn {
       display: inline-block;
@@ -198,67 +227,92 @@
       color: #fff;
       border: none;
       padding: 0.7em 2.1em;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1.07em;
       cursor: pointer;
       font-weight: 700;
       box-shadow: 0 2px 12px #0e2a4722;
       transition: background .18s;
+      margin-left: auto;
+      margin-right: 0;
     }
-    .pdf-btn:hover {
-      background: var(--secondary);
+    .pdf-btn:hover { background: var(--secondary);}
+    .table-scroll { overflow-x: auto; }
+    .remove-row-btn {
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      padding: 0.28em 0.62em;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em;
+      display: inline-flex;
+      align-items: center;
+      transition: background .16s;
     }
-    @media (max-width: 600px) {
-      .estimate-wrapper { padding: 1em 0.2em; }
-      .estimate-header { flex-direction: column; align-items: flex-start;}
-      .estimate-logo { margin-bottom: 1em; }
-      .data-preview {padding: 1em;}
-      .totals-box {padding: 0.7em 0.3em;}
+    .remove-row-btn:hover { background: #bc1c1c; }
+    /* Mobile Styles */
+    @media (max-width: 700px) {
+      .estimate-container { max-width: 99vw; border-radius: 0; }
+      .estimate-header { padding: 1.2em 0.8em 1em 0.8em; }
+      form { padding: 1.3em 0.8em 0.9em 0.8em; }
+      .data-preview { padding: 1em 0.3em; }
+      .totals-box { padding: 0.7em 0.3em; }
+      .estimate-table-section { margin-bottom: 1em; }
     }
+    @media (max-width: 520px) {
+      .form-row { flex-direction: column; gap: 0.7em;}
+      .form-group {min-width: 100px;}
+      .estimate-title { font-size: 1.3em;}
+      .estimate-id-date { font-size: 0.95em;}
+      .pdf-btn, .calc-btn { width: 100%; font-size: 1em;}
+    }
+    /* Table scroll */
+    .estimate-table-section { position: relative;}
+    .estimate-table-section::-webkit-scrollbar { height: 6px; }
+    .estimate-table-section::-webkit-scrollbar-thumb { background: #ddd; border-radius: 6px;}
   </style>
 </head>
 <body>
-  <div class="estimate-wrapper">
+  <div class="estimate-container">
     <div class="estimate-header">
       <img src="https://raw.githubusercontent.com/Player456B/rajmarketing/main/assets/images/logo.svg" alt="Raj Marketing Logo" class="estimate-logo">
-      <div class="estimate-title-group">
-        <div class="estimate-title">Estimate Form</div>
-        <div class="estimate-id" id="estId"></div>
-      </div>
+      <div class="estimate-title">Estimate Form</div>
+      <div class="estimate-id-date" id="estId"></div>
     </div>
     <form id="estForm" autocomplete="off">
-      <div class="estimate-form-section">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="cId">Customer ID</label>
-            <input type="text" id="cId" name="customerId" readonly placeholder="Auto">
-          </div>
-          <div class="form-group">
-            <label for="cName">Customer Name</label>
-            <input type="text" id="cName" name="customerName" required>
-          </div>
-          <div class="form-group">
-            <label for="cPhone">Phone Number</label>
-            <input type="tel" id="cPhone" name="customerPhone" pattern="[0-9]{10,}" required>
-          </div>
-          <div class="form-group">
-            <label for="cAddress">Address</label>
-            <textarea id="cAddress" name="customerAddress" rows="1" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="estDate">Estimate Date</label>
-            <input type="date" id="estDate" name="estimateDate" required>
-          </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cId">Customer ID</label>
+          <input type="text" id="cId" name="customerId" readonly placeholder="Auto">
+        </div>
+        <div class="form-group">
+          <label for="cName">Customer Name</label>
+          <input type="text" id="cName" name="customerName" required>
         </div>
       </div>
-      <div class="estimate-table-section">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cPhone">Phone Number</label>
+          <input type="tel" id="cPhone" name="customerPhone" pattern="[0-9]{10,}" required>
+        </div>
+        <div class="form-group">
+          <label for="cAddress">Address</label>
+          <textarea id="cAddress" name="customerAddress" rows="1" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="estDate">Estimate Date</label>
+          <input type="date" id="estDate" name="estimateDate" required>
+        </div>
+      </div>
+      <div class="estimate-table-section table-scroll">
         <table class="estimate-table" id="estTable">
           <thead>
             <tr>
               <th>Sl. No.</th>
               <th>Types of Nets</th>
-              <th>Width (inches)</th>
-              <th>Height (inches)</th>
+              <th>Width (in)</th>
+              <th>Height (in)</th>
               <th>Qty</th>
               <th>Sqft</th>
               <th>Price (₹)</th>
@@ -266,19 +320,19 @@
             </tr>
           </thead>
           <tbody id="tableBody">
-            <!-- rows go here -->
+            <!-- JS Rows -->
           </tbody>
         </table>
-        <button type="button" class="add-row-btn" onclick="addRow()">+ Add Row</button>
+        <button type="button" class="add-row-btn" onclick="addRow()"><span class="material-icons">add_circle_outline</span>Add Row</button>
       </div>
-      <button type="button" class="calc-btn" onclick="calculateEstimate()">Calculate & Preview</button>
+      <button type="button" class="calc-btn" onclick="calculateEstimate()">Calculate &amp; Preview</button>
       <div class="totals-box" id="totalsBox" style="display:none;">
         <div class="totals-row"><label>Total Quantity:</label><span id="totalQty"></span></div>
         <div class="totals-row"><label>Total Sqft:</label><span id="totalSqft"></span></div>
         <div class="totals-row"><label>Total Price:</label><span id="totalPrice"></span></div>
         <div class="totals-row"><label>GST (18%):</label><span id="gst"></span></div>
         <div class="totals-row"><label>Discount (%):</label>
-          <input type="number" id="discountPercent" min="0" max="100" value="0" style="width:60px;" onchange="calculateEstimate()">
+          <input type="number" id="discountPercent" min="0" max="100" value="0" onchange="calculateEstimate()">
         </div>
         <div class="totals-row"><label><b>Final Price:</b></label><span id="finalPrice" style="font-weight:700;color:var(--secondary)"></span></div>
       </div>
@@ -286,36 +340,39 @@
     <div class="data-preview" id="previewBox" style="display:none;"></div>
     <button class="pdf-btn" id="toPdfBtn" style="display:none;" onclick="downloadPDF()">Download PDF</button>
   </div>
+  <!-- PDF Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    // Pricing per net type
+    // Net types
     const netTypes = [
       {label: "Velcro System", price: 60},
       {label: "Frame System", price: 180},
       {label: "Pleated Nets", price: 350},
       {label: "Fly mesh Door", price: 380}
     ];
-    // Try to auto-fill customer info if available in localStorage (simulate rajmarketing)
+    // Prefill user
     let users = JSON.parse(localStorage.getItem('raj_users')||'[]');
     let logged = localStorage.getItem('raj_loggedin');
     let user = users.find(u=>u.phone===logged);
-    if(user) {
-      document.addEventListener('DOMContentLoaded',()=>{
+    document.addEventListener('DOMContentLoaded',()=>{
+      if(user) {
         document.getElementById('cId').value = user.id || '';
         document.getElementById('cName').value = user.name || '';
         document.getElementById('cPhone').value = user.phone || '';
         document.getElementById('cAddress').value = user.address || '';
-      });
-    } else {
-      document.addEventListener('DOMContentLoaded',()=>{
+      }
+      else {
         document.getElementById('cId').value = '';
         document.getElementById('cName').value = '';
         document.getElementById('cPhone').value = '';
         document.getElementById('cAddress').value = '';
-      });
-    }
-    // Estimate ID generation
+      }
+      document.getElementById('estDate').valueAsDate = new Date();
+      document.getElementById('estId').textContent = "Estimate ID: " + genEstimateId() +
+        " | Date: " + new Date().toLocaleDateString();
+      addRow();
+    });
     function genEstimateId() {
       const now = new Date();
       const mm = String(now.getMonth()+1).padStart(2,'0');
@@ -323,9 +380,6 @@
       const rand = String(Math.floor(Math.random()*9000)+1000);
       return `${mm}${dd}-${rand}`;
     }
-    document.getElementById('estId').textContent = "Estimate ID: " + genEstimateId();
-    document.getElementById('estDate').valueAsDate = new Date();
-
     // Table logic
     function addRow(typeIdx=0) {
       const table = document.getElementById('tableBody');
@@ -343,7 +397,11 @@
         <td><input type="number" min="1" max="100" class="qty" onchange="updateRow(this)" required></td>
         <td><input type="text" class="sqft" readonly></td>
         <td><input type="text" class="price" readonly></td>
-        <td><button type="button" onclick="removeRow(this)" style="background:#ef4444;color:#fff;border:none;padding:0.4em 0.7em;border-radius:5px;cursor:pointer;">✖</button></td>
+        <td>
+          <button type="button" class="remove-row-btn" title="Remove Row" onclick="removeRow(this)">
+            <span class="material-icons" aria-label="remove row">delete_outline</span>
+          </button>
+        </td>
       `;
       tr.querySelector('.netType').selectedIndex = typeIdx;
       table.appendChild(tr);
@@ -373,9 +431,10 @@
       tr.querySelector('.sqft').value = sqft.toFixed(2);
       tr.querySelector('.price').value = price.toFixed(2);
     }
-    // Add one row by default
-    document.addEventListener('DOMContentLoaded',()=>addRow());
-
+    // Listen for manual edits in table to update values
+    document.getElementById('tableBody').addEventListener('input', function(e){
+      updateRow(e.target);
+    });
     // Calculate logic
     function calculateEstimate() {
       // Validate required
@@ -417,32 +476,34 @@
         tr.querySelector('.price').value = price.toFixed(2);
       });
       // Totals
-      const gst = totalPrice*0.18;
       const discount = +document.getElementById('discountPercent').value||0;
       const afterDiscount = totalPrice * (1 - discount/100);
-      const finalPrice = afterDiscount + (afterDiscount*0.18);
-
+      const gst = afterDiscount * 0.18;
+      const finalPrice = afterDiscount + gst;
       document.getElementById('totalsBox').style.display = '';
       document.getElementById('totalQty').textContent = totalQty;
       document.getElementById('totalSqft').textContent = totalSqft.toFixed(2);
       document.getElementById('totalPrice').textContent = "₹" + totalPrice.toFixed(2);
-      document.getElementById('gst').textContent = "₹" + (afterDiscount*0.18).toFixed(2);
+      document.getElementById('gst').textContent = "₹" + gst.toFixed(2);
       document.getElementById('finalPrice').textContent = "₹" + finalPrice.toFixed(2);
-
       // Data preview
       let preview = `
-        <h2 style="color:var(--primary)">Estimate Preview</h2>
-        <div style="display:flex;align-items:flex-start;gap:2em;">
+        <div style="display:flex;align-items:center;gap:1.1em;flex-wrap:wrap;">
+          <img src="https://raw.githubusercontent.com/Player456B/rajmarketing/main/assets/images/logo.svg" style="width:58px;height:58px;object-fit:contain;border-radius:9px;box-shadow:0 2px 9px #0002;background:#fff;">
           <div>
-            <b>Customer Name:</b> ${document.getElementById('cName').value}<br>
-            <b>Phone:</b> ${document.getElementById('cPhone').value}<br>
-            <b>Address:</b> ${document.getElementById('cAddress').value}<br>
-            <b>Date:</b> ${document.getElementById('estDate').value}<br>
-            <b>Estimate ID:</b> ${document.getElementById('estId').textContent.replace("Estimate ID: ","")}<br>
+            <span style="font-size:1.27em;font-weight:700;color:#191970;letter-spacing:0.01em;">Estimate Preview</span><br>
+            <span style="font-size:0.98em;color:#1fc8db;font-weight:600">${document.getElementById('estId').textContent}</span>
           </div>
         </div>
-        <table border="1" cellpadding="6" style="margin:1.3em 0 0 0;width:100%;border-collapse:collapse;background:#fff;font-size:1em;">
-          <tr style="background:var(--primary);color:#fff;">
+        <div style="margin:1.2em 0 0.7em 0;line-height:1.7">
+          <b>Customer Name:</b> ${document.getElementById('cName').value}<br>
+          <b>Phone:</b> ${document.getElementById('cPhone').value}<br>
+          <b>Address:</b> ${document.getElementById('cAddress').value}<br>
+          <b>Date:</b> ${document.getElementById('estDate').value}<br>
+        </div>
+        <div style="overflow-x:auto;">
+        <table border="1" cellpadding="6" style="margin:0.8em 0 0.7em 0;width:100%;border-collapse:collapse;background:#fff;font-size:0.99em;min-width:600px;">
+          <tr style="background:linear-gradient(90deg,#1fc8db .8%,#191970 90%);color:#fff;">
             <th>Sl.No.</th>
             <th>Type</th>
             <th>Width (in)</th>
@@ -465,42 +526,54 @@
             </tr>
           `).join('')}
         </table>
-        <div style="margin-top:1.1em;max-width:350px;">
+        </div>
+        <div style="margin-top:0.7em;max-width:350px;">
           <div><b>Total Qty:</b> ${totalQty}</div>
           <div><b>Total Sqft:</b> ${totalSqft.toFixed(2)}</div>
           <div><b>Total Price:</b> ₹${totalPrice.toFixed(2)}</div>
           <div><b>Discount:</b> ${discount}% (₹${(totalPrice*discount/100).toFixed(2)})</div>
           <div><b>Sub Total:</b> ₹${afterDiscount.toFixed(2)}</div>
-          <div><b>GST(18%):</b> ₹${(afterDiscount*0.18).toFixed(2)}</div>
-          <div style="font-size:1.15em;color:var(--secondary);font-weight:700;"><b>Final Price (Incl. GST):</b> ₹${finalPrice.toFixed(2)}</div>
+          <div><b>GST(18%):</b> ₹${gst.toFixed(2)}</div>
+          <div style="font-size:1.09em;color:#1fc8db;font-weight:700;"><b>Final Price (Incl. GST):</b> ₹${finalPrice.toFixed(2)}</div>
         </div>
+        <div style="margin-top:1.7em;font-size:0.97em;color:#888;">Thank you for choosing <b>Raj Marketing</b>!</div>
       `;
       document.getElementById('previewBox').innerHTML = preview;
       document.getElementById('previewBox').style.display = '';
       document.getElementById('toPdfBtn').style.display = '';
     }
-
-    // Listen for manual edits in table to update values
-    document.getElementById('tableBody').addEventListener('input', function(e){
-      updateRow(e.target);
-    });
-
-    // PDF logic
+    // PDF logic: use higher scale for better quality & A4 size support
     function downloadPDF() {
       const preview = document.getElementById('previewBox');
-      html2canvas(preview, {scale:2}).then(canvas=>{
+      html2canvas(preview, {scale:2, useCORS:true, backgroundColor: "#fff"}).then(canvas=>{
         const imgData = canvas.toDataURL('image/png', 1.0);
         const pdf = new window.jspdf.jsPDF({
           orientation: 'portrait',
           unit: 'pt',
           format: 'a4'
         });
+        // Calculate image dims
         const pageWidth = pdf.internal.pageSize.getWidth();
         const pageHeight = pdf.internal.pageSize.getHeight();
-        let imgWidth = pageWidth-40;
+        let imgWidth = pageWidth - 40;
         let imgHeight = canvas.height * imgWidth / canvas.width;
-        pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight, '', 'FAST');
-        pdf.save('Estimate-'+ document.getElementById('estId').textContent.replace("Estimate ID: ","") +'.pdf');
+        let position = 20;
+        if (imgHeight > pageHeight - 40) {
+          // Multi-page
+          let heightLeft = imgHeight;
+          let y = position;
+          while (heightLeft > 0) {
+            pdf.addImage(imgData, 'PNG', 20, y, imgWidth, imgHeight, '', 'FAST');
+            heightLeft -= pageHeight - 40;
+            if (heightLeft > 0) {
+              pdf.addPage();
+              y = 20;
+            }
+          }
+        } else {
+          pdf.addImage(imgData, 'PNG', 20, position, imgWidth, imgHeight, '', 'FAST');
+        }
+        pdf.save('Estimate-'+ document.getElementById('estId').textContent.replace("Estimate ID: ","").split('|')[0].trim() +'.pdf');
       });
     }
   </script>
