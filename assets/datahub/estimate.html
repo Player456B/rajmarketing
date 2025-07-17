@@ -219,6 +219,10 @@
       padding: 1.85em 1.1em 1.2em 1.1em;
       box-shadow: 0 2px 18px #0001;
       font-size: 1.03em;
+      /* limit width for mobile pdf rendering */
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .pdf-btn {
       display: inline-block;
@@ -251,26 +255,52 @@
       transition: background .16s;
     }
     .remove-row-btn:hover { background: #bc1c1c; }
-    /* Mobile Styles */
+
+    /* Responsive styles overhaul */
+    @media (max-width: 900px) {
+      .estimate-container { max-width: 99vw; }
+      .data-preview { max-width: 99vw; }
+    }
     @media (max-width: 700px) {
-      .estimate-container { max-width: 99vw; border-radius: 0; }
+      .estimate-container { max-width: 100vw; border-radius: 0; box-shadow: none;}
       .estimate-header { padding: 1.2em 0.8em 1em 0.8em; }
       form { padding: 1.3em 0.8em 0.9em 0.8em; }
       .data-preview { padding: 1em 0.3em; }
       .totals-box { padding: 0.7em 0.3em; }
       .estimate-table-section { margin-bottom: 1em; }
+      .estimate-table { min-width: 540px; font-size: 0.92em; }
+      .estimate-title { font-size: 1.25em; }
     }
     @media (max-width: 520px) {
       .form-row { flex-direction: column; gap: 0.7em;}
       .form-group {min-width: 100px;}
-      .estimate-title { font-size: 1.3em;}
-      .estimate-id-date { font-size: 0.95em;}
+      .estimate-title { font-size: 1.1em;}
+      .estimate-id-date { font-size: 0.92em;}
       .pdf-btn, .calc-btn { width: 100%; font-size: 1em;}
+      .estimate-header,form {padding-left:0.4em;padding-right:0.4em;}
+      .estimate-table { min-width: 400px; font-size: 0.85em;}
+      .data-preview {padding:0.7em 0.18em;font-size:0.98em;}
     }
-    /* Table scroll */
+    @media (max-width: 400px) {
+      .estimate-title { font-size: 0.95em;}
+      .estimate-id-date { font-size: 0.85em;}
+      .estimate-table { min-width: 300px;}
+      .data-preview {font-size:0.93em;}
+    }
+
+    /* Table scroll for touch devices */
     .estimate-table-section { position: relative;}
     .estimate-table-section::-webkit-scrollbar { height: 6px; }
     .estimate-table-section::-webkit-scrollbar-thumb { background: #ddd; border-radius: 6px;}
+    /* Hide number arrows for inputs on mobile */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
   </style>
 </head>
 <body>
@@ -486,28 +516,28 @@
       document.getElementById('totalPrice').textContent = "₹" + totalPrice.toFixed(2);
       document.getElementById('gst').textContent = "₹" + gst.toFixed(2);
       document.getElementById('finalPrice').textContent = "₹" + finalPrice.toFixed(2);
-      // Data preview
+      // Data preview (improved for mobile/pdf)
       let preview = `
-        <div style="display:flex;align-items:center;gap:1.1em;flex-wrap:wrap;">
-          <img src="https://raw.githubusercontent.com/Player456B/rajmarketing/main/assets/images/logo.svg" style="width:58px;height:58px;object-fit:contain;border-radius:9px;box-shadow:0 2px 9px #0002;background:#fff;">
+        <div style="display:flex;align-items:center;gap:1.1em;flex-wrap:wrap;margin-bottom:0.7em;">
+          <img src="https://raw.githubusercontent.com/Player456B/rajmarketing/main/assets/images/logo.svg" style="width:54px;height:54px;object-fit:contain;border-radius:9px;box-shadow:0 2px 9px #0002;flex-shrink:0;">
           <div>
-            <span style="font-size:1.27em;font-weight:700;color:#191970;letter-spacing:0.01em;">Estimate Preview</span><br>
-            <span style="font-size:0.98em;color:#1fc8db;font-weight:600">${document.getElementById('estId').textContent}</span>
+            <span style="font-size:1.12em;font-weight:700;color:#191970;letter-spacing:0.01em;">Estimate Preview</span><br>
+            <span style="font-size:0.92em;color:#1fc8db;font-weight:600">${document.getElementById('estId').textContent}</span>
           </div>
         </div>
-        <div style="margin:1.2em 0 0.7em 0;line-height:1.7">
+        <div style="margin:0.8em 0 0.5em 0;line-height:1.5;font-size:0.99em;">
           <b>Customer Name:</b> ${document.getElementById('cName').value}<br>
           <b>Phone:</b> ${document.getElementById('cPhone').value}<br>
           <b>Address:</b> ${document.getElementById('cAddress').value}<br>
           <b>Date:</b> ${document.getElementById('estDate').value}<br>
         </div>
         <div style="overflow-x:auto;">
-        <table border="1" cellpadding="6" style="margin:0.8em 0 0.7em 0;width:100%;border-collapse:collapse;background:#fff;font-size:0.99em;min-width:600px;">
+        <table border="1" cellpadding="5" style="margin:0.7em 0;width:100%;border-collapse:collapse;background:#fff;font-size:0.97em;min-width:320px;">
           <tr style="background:linear-gradient(90deg,#1fc8db .8%,#191970 90%);color:#fff;">
             <th>Sl.No.</th>
             <th>Type</th>
-            <th>Width (in)</th>
-            <th>Height (in)</th>
+            <th>W</th>
+            <th>H</th>
             <th>Qty</th>
             <th>Sqft</th>
             <th>Unit Price</th>
@@ -527,55 +557,4 @@
           `).join('')}
         </table>
         </div>
-        <div style="margin-top:0.7em;max-width:350px;">
-          <div><b>Total Qty:</b> ${totalQty}</div>
-          <div><b>Total Sqft:</b> ${totalSqft.toFixed(2)}</div>
-          <div><b>Total Price:</b> ₹${totalPrice.toFixed(2)}</div>
-          <div><b>Discount:</b> ${discount}% (₹${(totalPrice*discount/100).toFixed(2)})</div>
-          <div><b>Sub Total:</b> ₹${afterDiscount.toFixed(2)}</div>
-          <div><b>GST(18%):</b> ₹${gst.toFixed(2)}</div>
-          <div style="font-size:1.09em;color:#1fc8db;font-weight:700;"><b>Final Price (Incl. GST):</b> ₹${finalPrice.toFixed(2)}</div>
-        </div>
-        <div style="margin-top:1.7em;font-size:0.97em;color:#888;">Thank you for choosing <b>Raj Marketing</b>!</div>
-      `;
-      document.getElementById('previewBox').innerHTML = preview;
-      document.getElementById('previewBox').style.display = '';
-      document.getElementById('toPdfBtn').style.display = '';
-    }
-    // PDF logic: use higher scale for better quality & A4 size support
-    function downloadPDF() {
-      const preview = document.getElementById('previewBox');
-      html2canvas(preview, {scale:2, useCORS:true, backgroundColor: "#fff"}).then(canvas=>{
-        const imgData = canvas.toDataURL('image/png', 1.0);
-        const pdf = new window.jspdf.jsPDF({
-          orientation: 'portrait',
-          unit: 'pt',
-          format: 'a4'
-        });
-        // Calculate image dims
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
-        let imgWidth = pageWidth - 40;
-        let imgHeight = canvas.height * imgWidth / canvas.width;
-        let position = 20;
-        if (imgHeight > pageHeight - 40) {
-          // Multi-page
-          let heightLeft = imgHeight;
-          let y = position;
-          while (heightLeft > 0) {
-            pdf.addImage(imgData, 'PNG', 20, y, imgWidth, imgHeight, '', 'FAST');
-            heightLeft -= pageHeight - 40;
-            if (heightLeft > 0) {
-              pdf.addPage();
-              y = 20;
-            }
-          }
-        } else {
-          pdf.addImage(imgData, 'PNG', 20, position, imgWidth, imgHeight, '', 'FAST');
-        }
-        pdf.save('Estimate-'+ document.getElementById('estId').textContent.replace("Estimate ID: ","").split('|')[0].trim() +'.pdf');
-      });
-    }
-  </script>
-</body>
-</html>
+        <div style="marg
